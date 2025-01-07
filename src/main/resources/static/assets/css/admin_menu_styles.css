@@ -1,0 +1,71 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Evitar scroll horizontal */
+}
+
+/* Estructura general */
+.header,
+.footer {
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff8c00; /* Color naranja */
+}
+
+.footer {
+    background-color: #ff8c00; /* Color naranja para el footer */
+    position: relative; /* Cambiado a relative para que no esté fijo */
+}
+
+.admin-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px); /* Resta altura del header y footer */
+    padding: 20px;
+}
+
+.admin-menu {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 800px; /* Limitar el ancho máximo */
+}
+
+.admin-menu h2 {
+    margin-top: 0;
+    color: #ff8c00; /* Título en naranja */
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item button {
+    background-color: #ff8c00; /* Botón en color naranja */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.menu-item button:hover {
+    background-color: #e07b00; /* Color más oscuro al pasar el ratón */
+}

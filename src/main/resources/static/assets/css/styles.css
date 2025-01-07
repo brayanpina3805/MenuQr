@@ -1,0 +1,108 @@
+/* Estructura general */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.header, .footer {
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff8c00;
+}
+
+.menu-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background-size: cover;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 1600px; /* Aumentamos el ancho */
+}
+
+.menu-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu-title h2 {
+    margin: 0;
+    color: #ff8c00;
+}
+
+.menu-item {
+    flex: 1 1 calc(25% - 15px); /* 4 columnas */
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+
+.menu-item h3 {
+    margin: 10px 0 5px;
+    color: #ff8c00;
+}
+
+.menu-item img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px 0; /* Imagen debajo del nombre */
+}
+
+.menu-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.menu-item .price {
+    font-weight: bold;
+    color: #333;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+    background-color: #f4f4f4;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .menu-item {
+        flex: 1 1 calc(33.33% - 15px); /* 3 columnas en pantallas medianas */
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-item {
+        flex: 1 1 calc(50% - 15px); /* 2 columnas en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-item {
+        flex: 1 1 100%; /* 1 columna en pantallas muy pequeñas */
+    }
+}

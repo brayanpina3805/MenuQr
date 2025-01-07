@@ -1,218 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
-<head th:replace="layouts/HeadLayout:: head"></head>
-<body class="miami">
-<div id="loader">
-    <div class="spinner">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
-    </div>
-</div>
 
-<div id="scrollUp" title="Scroll To Top">
-    <i class="icofont-bubble-up"></i>
-</div>
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Administrar Menú</title>
+                <link rel="stylesheet" th:href="@{/assets/css/admin_menu_styles.css}">
+                    </head>
 
+                    <body>
+                        <div class="header">
+                            <h1>Administrar Menú</h1>
+                        </div>
 
-<div class="all-area">
-    <!-- ***** Menu ***** -->
-    <header th:replace="layouts/HeaderLayout::header"></header>
-
-    <!-- ***** PantallaPrincipal ***** -->
-    <section th:replace="layouts/PantallaPrincipal:: section"></section>
-
-
-    <!--====== Pedido ======-->
-    <div class="modal fade pedido" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <br>
-                    <div class="card card-body">
-                        <div class="card-body">
-                            <ul class="nav nav-tabs" id="myIconTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-icon-tab" data-toggle="tab" href="#homeIcon"
-                                       role="tab" aria-controls="homeIcon" aria-selected="true">
-                                        <i class="nav-icon i-Home1 mr-1"></i>Pedido
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-icon-tab" data-toggle="tab" href="#profileIcon"
-                                       role="tab" aria-controls="profileIcon" aria-selected="false">
-                                        <i class="nav-icon i-Home1 mr-1"></i>Mis Pedidos
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div class="tab-content" id="myIconTabContent">
-                                <!-- Pedido Tab Pane -->
-                                <div class="tab-pane fade show active" id="homeIcon" role="tabpanel"
-                                     aria-labelledby="home-icon-tab" style="text-align: right">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped search-table v-middle">
-                                            <thead class="header-item" style="text-align: center">
-                                            <th class="text-dark font-weight-bold"></th>
-                                            <th class="text-dark font-weight-bold">Producto</th>
-                                            <th class="text-dark font-weight-bold">Descripcion</th>
-                                            <th class="text-dark font-weight-bold">Precio</th>
-                                            <th class="text-dark font-weight-bold">Cantidad</th>
-                                            <th class="text-dark font-weight-bold">Total</th>
-                                            <th class="text-dark font-weight-bold"></th>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p id="Cantidad"></p>
-                                    <br>
-                                    <button type="button" class="btn btn-primary" onclick="confirmarYEnviarPedido()">
-                                        Solicitar
-                                    </button>
+                        <div class="admin-menu-container">
+                            <div class="admin-menu">
+                                <h2>Elementos del Menú</h2>
+                                <div class="menu-item">
+                                    <span>Opción 1</span>
+                                    <button>Editar</button>
                                 </div>
-
-                                <!-- Mis Pedidos DetallePedido -->
-                                <div class="tab-pane fade" id="profileIcon" role="tabpanel"
-                                     aria-labelledby="profile-icon-tab">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped search-table v-middle">
-                                            <thead class="header-item">
-                                            <th class="text-dark font-weight-bold">Folio</th>
-                                            <th class="text-dark font-weight-bold">Fecha Pedido</th>
-                                            <th class="text-dark font-weight-bold">Fecha Entregado</th>
-                                            <th class="text-dark font-weight-bold">Estatus</th>
-                                            <th class="text-center"></th>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:if="${pedidos.isEmpty()}" class="search-items">
-                                                <td colspan="5" class="text-center">No has realizado ningun pedido</td>
-                                            </tr>
-                                            <tr class="search-items" th:each="pedido: ${pedidos}"
-                                                th:unless="${pedidos.isEmpty()}">
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="ml-2">
-                                                            <div class="user-meta-info">
-                                                                <h5 class="user-name mb-0"
-                                                                    th:text="${pedido.getPedId()}"></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="usr-location" th:text="${pedido.getFecha()}"></span>
-                                                </td>
-                                                <td>
-                                                    <span class="usr-email-addr"
-                                                          th:text="${pedido.getFechaCon()}"></span>
-                                                </td>
-                                                <td>
-                                                    <span th:class="${pedido.getPedEst().getCatEstId() == 1 ? 'badge badge-danger' :
-                                                   pedido.getPedEst().getCatEstId() == 2 ? 'badge badge-warning' :
-                                                    pedido.getPedEst().getCatEstId() == 3 ? 'badge badge-success'  : 'badge badge-info'}"
-                                                          th:text="${pedido.getPedEst().getDescripcion()}"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a class="text-success mr-2" href="#"
-                                                       th:data-idPedido="${pedido.getPedId()}"
-                                                       th:data-idEstatus="${pedido.getPedEst().getCatEstId()}"
-                                                       data-toggle="modal"
-                                                       data-target="#miModalGrande">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="menu-item">
+                                    <span>Opción 2</span>
+                                    <button>Editar</button>
+                                </div>
+                                <div class="menu-item">
+                                    <span>Opción 3</span>
+                                    <button>Editar</button>
+                                </div>
+                                <div class="menu-item">
+                                    <span>Opción 4</span>
+                                    <button>Editar</button>
+                                </div>
+                                <div class="menu-item">
+                                    <span>Opción 5</span>
+                                    <button>Editar</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+                        <div class="footer">
+                            <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
+                        </div>
+                    </body>
 
-    <!-- Modal -->
-    <div class="modal fade" id="miModalGrande" tabindex="-1" role="dialog" aria-labelledby="modalLabelGrande"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabelGrande">Detalle de Pedido </h5>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped search-table v-middle">
-                            <thead class="header-item" style="text-align: center">
-                            <th class="text-dark font-weight-bold"></th>
-                            <th class="text-dark font-weight-bold">Producto</th>
-                            <th class="text-dark font-weight-bold">Descripcion</th>
-                            <th class="text-dark font-weight-bold">Precio</th>
-                            <th class="text-dark font-weight-bold">Cantidad</th>
-                            <th class="text-dark font-weight-bold">Total</th>
-                            <th class="text-dark font-weight-bold"></th>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                        <p id="totalPedido" style="text-align: right"></p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="miModalRecibido" tabindex="-1" role="dialog" aria-labelledby="modalLabelGrande"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmar Entrega</h5>
-                </div>
-                <div class="modal-body">
-                    <form action="#" method="post">
-                        <label for="descripcion">Observaciones:</label><br>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4"
-                                  cols="50"></textarea><br><br>
-                        <button type="button" class="btn  btn-primary" id="enviarObsEstBtn" data-dismiss="modal">
-                            Aceptar
-                        </button>
-                        <button type="button" class="btn  btn-primary" data-dismiss="modal">
-                            Cerrar
-                        </button>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Ingredientes -->
-    <div th:replace="layouts/IndexLayout:: div"></div>
-    <footer th:replace="layouts/FooterLayout:: footer"></footer>
-</div>
-
-
-
-
-
-<!-- Generales -->
-<script th:replace="layouts/ScriptLayout:: script"></script>
-<script th:src="@{/assets/js/utilities/ScriptPedidosIndex.js}"></script>
-
-</body>
-</html>
+                    </html>
