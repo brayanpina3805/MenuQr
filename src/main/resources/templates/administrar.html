@@ -1,0 +1,314 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<head th:replace="layouts/HeadLayout:: head"></head>
+
+
+<body class="miami">
+<div id="loader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+<div id="scrollUp" title="Scroll To Top">
+    <i class="icofont-bubble-up"></i>
+</div>
+<div class="all-area">
+    <header class="section header-area">
+        <div id="appo-header" class="main-header-area">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" th:src="@{/assets/img/logoColibri.png}" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appo-menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="appo-menu">
+                        <ul class="navbar-nav header-items ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/private/index}">Inicio</a>
+                            </li>
+                            <form th:action="@{/logout}" th:method="post">
+                                <li class="nav-item">
+                                    <button type="submit" class="nav-link btn btn-bordered">Salir</button>
+                                </li>
+                            </form>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ***** Blog Area Start ***** -->
+    <section id="features" class="section benifits-area ptb_100">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-6">
+                <br>
+                <br>
+                <div class="section-heading text-center">
+                    <h2 class="text-capitalize">ADMINISTRAR USUARIOS E PRODUCTOS.</h2>
+                    <p class="d-none d-sm-block mt-4">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Para alerta de error -->
+            <div th:if="${alerta}" class="alert alert-danger" role="alert">
+                <span th:text="${alerta}"></span>
+            </div>
+
+            <!-- Para alerta de éxito -->
+            <div th:if="${alertaExito}" class="alert alert-success" role="alert">
+                <span th:text="${alertaExito}"></span>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myIconTab" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="home-icon-tab" data-toggle="tab"
+                                            href="#homeIcon" role="tab" aria-controls="homeIcon" aria-selected="true"><i
+                            class="nav-icon i-Home1 mr-1"></i>Productos</a></li>
+                    <li class="nav-item" th:if="${session.usuario.usuTipo.getCatUsuId() == 1}"><a class="nav-link"
+                                                                                                  id="profile-icon-tab"
+                                                                                                  data-toggle="tab"
+                                                                                                  href="#profileIcon"
+                                                                                                  role="tab"
+                                                                                                  aria-controls="profileIcon"
+                                                                                                  aria-selected="false"><i
+                            class="nav-icon i-Home1 mr-1"></i> Personal</a></li>
+                    <li class="nav-item"><a class="nav-link" id="contact-icon-tab" data-toggle="tab"
+                                            href="#contactIcon" role="tab" aria-controls="contactIcon"
+                                            aria-selected="false"><i
+                            class="nav-icon i-Home1 mr-1"></i> Comentarios</a></li>
+                </ul>
+
+                <!--========================= Tabla de Productos =========================-->
+                <div class="tab-content" id="myIconTabContent">
+                    <br>
+                    <br>
+                    <div class="tab-pane fade show active" id="homeIcon" role="tabpanel"
+                         aria-labelledby="home-icon-tab">
+                        <div class="col-md-12 mb-4" style="text-align: right">
+                            <button type="button" class="btn btn-primary " id="btn-agregar" data-toggle="modal"
+                                    data-target="#miModalGrande"> Agregar
+                            </button>
+                            <div class="table-responsive">
+                                <table class="table table-borderless" id="zero_configuration_table"
+                                       style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Clave Producto</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Tipo Producto</th>
+                                        <th scope="col">Estatus</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="pro : ${productos}" th:data-product-id="${pro.getProdId()}">
+                                        <td th:text="${pro.getProdId()}"></td>
+                                        <td><img th:src="${pro.getImagen()}" alt="avatar" class="rounded-circle"
+                                                 width="35"></td>
+                                        <td th:text="${pro.getProducto()}"></td>
+                                        <td th:text="${pro.getProdTipo().getDescripcion()}"></td>
+                                        <td><span th:class="${pro.getProdEstatus().getCatEstId() == 1 ? 'badge badge-success' :
+                                                  pro.getProdEstatus().getCatEstId() == 3 ? 'badge badge-danger' : 'badge badge-warning'}"
+                                                  th:text="${pro.getProdEstatus().getDescripcion()}"></span></td>
+                                        <td>
+                                            <a class="text-success mr-2 btn-editar-producto" href="#"
+                                               th:data-prod-id="${pro.getProdId()}"
+                                               th:data-prod-nombre="${pro.getProducto()}"
+                                               th:data-prod-ingredientes="${pro.getIngredientes()}"
+                                               th:data-prod-descripcion="${pro.getDescripcion()}"
+                                               th:data-prod-precio="${pro.getPrecio()}"
+                                               th:data-prod-imagen="${pro.getImagen()}"
+                                               th:data-prod-tipo="${pro.getProdTipo().getCatProdId()}"
+                                               th:data-prod-estatus="${pro.getProdEstatus().getCatEstId()}"
+                                               data-toggle="modal" data-target="#miModalGrande"
+                                               data-whatever="@mdo">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <a class="text-danger mr-2 delete-product"
+                                               th:href="@{/private/eliminarProducto(prodId=${pro.getProdId()})}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--========================= Tabla de Usuarios =========================-->
+                    <div class="tab-pane fade" id="profileIcon" role="tabpanel" aria-labelledby="profile-icon-tab">
+                        <div class="col-md-12 mb-4" style="text-align: right">
+                            <div class="table-responsive">
+                                <table class="table table-borderless" id="comma_decimal_table" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Clave Usuario</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Tipo Usuario</th>
+                                        <th scope="col">Estatus</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="usu : ${usuarios}">
+                                        <td th:text="${usu.getUsuId()}"></td>
+                                        <td th:text="${usu.getNombre()}"></td>
+                                        <td th:text="${usu.getUsuTipo().getDescripcion()}"></td>
+                                        <td><span th:class="${usu.getUsuEst().getCatEstId() == 1 ? 'badge badge-success' :
+                                                   usu.getUsuEst().getCatEstId() == 2 ? 'badge badge-danger' : 'badge badge-warning'}"
+                                                  th:text="${usu.getUsuEst().getDescripcion()}"></span></td>
+                                        <td>
+                                            <a class="text-success mr-2 btn-updateAdUser" href="#"
+                                               th:data-usu-usuId="${usu.getUsuId()}"
+                                               th:data-usu-nombre="${usu.getNombre()}"
+                                               th:data-usu-correo="${usu.getCorreo()}"
+                                               th:data-usu-usuTipo="${usu.getUsuTipo().getCatUsuId()}"
+                                               th:data-usu-usuEst="${usu.getUsuEst().getCatEstId()}"
+                                               th:data-usu-usuAula="${usu.getUsuAula().getCatAulaId()}"
+
+                                               data-toggle="modal" data-target="#agregarActualizarUsers"
+                                               data-whatever="@mdo">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="text-danger mr-2"
+                                               th:href="@{/private/eliminarUser(usuId=${usu.getUsuId()})}"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--========================= Tabla de Comentarios =========================-->
+                    <div class="tab-pane fade" id="contactIcon" role="tabpanel" aria-labelledby="contact-icon-tab">
+                        <div class="col-md-12 mb-4">
+                            <div class="table-responsive">
+                                <table class="table table-borderless" id="multicolumn_ordering_table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Clave Comentario</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Asunto</th>
+                                        <th scope="col">Estatus</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="comen : ${comentarios}">
+                                        <td th:text="${comen.getComId()}"></td>
+                                        <td th:text="${comen.getNombre()}"></td>
+                                        <td th:text="${comen.getCorreo()}"></td>
+                                        <td th:text="${comen.getAsunto()}"></td>
+                                        <td><span th:class="${comen.getComTipo().getCatEstId() == 1 ? 'badge badge-success' :
+                 comen.getComTipo().getCatEstId() == 5 ? 'badge badge-danger' :
+                 comen.getComTipo().getCatEstId() == 3 ? 'badge badge-warning' : 'badge badge-info'}"
+                                                  th:text="${comen.getComTipo().getDescripcion()}"></span>
+                                        </td>
+                                        <td>
+                                            <a class="text-success mr-2 btn-editar-comentario" href="#"
+                                               th:data-com-id="${comen.getComId()}"
+                                               th:data-com-mensaje="${comen.getMensaje()}"
+                                               th:data-com-comTipo="${comen.getComTipo().getCatEstId()}"
+                                               data-toggle="modal" data-target="#updateComentario"
+                                               data-whatever="@mdo">
+                                                <i class="fa fa-edit" th:data-com-id="${comen.getComId()}"></i>
+                                            </a>
+                                            <a class="text-danger mr-2 delete-comentario"
+                                               th:href="@{/private/eliminarComentario(comId=${comen.getComId()})}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer th:replace="layouts/FooterLayout:: footer"></footer>
+</div>
+
+
+<!-- Modal Para Actualizar y Dar de Alta -->
+<div class="modal fade" id="agregarActualizarUsers" tabindex="-1" role="dialog" aria-labelledby="modalLabelGrande"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Producto</h5>
+                <button style="text-align: right" type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="alert-container"></div>
+                <form id="usuarioForm" class="login-form signup-form" method="post">
+                    <input type="number" class="form-control" id="usuId" name="usuId" hidden/>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                               onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" class="form-control" id="correo" name="correo">
+                    </div>
+                    <div class="mb-3" style="text-align: left">
+                        <label for="usuAula" class="form-label">Aula:</label>
+                        <select class="form-select" id="usuAula" name="usuAula">
+                            <option value="">-- Selecciona un aula --</option>
+                            <option th:each="aula : ${aulas}" th:value="${aula.catAulaId}"
+                                    th:text="${aula.numero + ' - ' + aula.descripcion}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3" style="text-align: left">
+                        <label for="usuTipo" class="form-label">Estatus Usuario:</label>
+                        <select class="form-select" id="usuTipo" name="usuTipo">
+                            <option value="">-- Selecciona un aula --</option>
+                            <option th:each="usuT : ${tipoUsu}" th:value="${usuT.getCatUsuId()}"
+                                    th:text="${ usuT.getDescripcion()}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3" style="text-align: left">
+                        <label for="usuEst" class="form-label">Tipo de Usuario:</label>
+                        <select class="form-select" id="usuEst" name="usuEst">
+                            <option value="">-- Selecciona un aula --</option>
+                            <option th:each="usuE : ${estUsu}" th:value="${usuE.getCatEstId()}"
+                                    th:text="${usuE.getDescripcion()}"></option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3" style="text-align: center;">
+                        <input type="submit" id="updateUser" class="btn btn-primary" value="Actualizar">
+                        <input type="reset" value="Borrar"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layouts/ModalAdministrarLayoutl :: div "></div>
+
+<script th:replace="layouts/ScriptLayout:: script"></script>
+<!--Tablas-->
+<script th:src="@{/assets/js/plugins/datatables.min.js}"></script>
+<script th:src="@{/assets/js/scripts/datatables.script.min.js}"></script>
+<script th:src="@{/assets/js/utilities/Administrar.js}"></script>g
+</body>
+
+</html>

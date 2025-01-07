@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+
+<head th:replace="layouts/HeadLayout:: head"></head>
+
+<body>
+<div id="loader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+<section class="section login-area signup-area h-100vh py-4">
+    <div class="container h-100">
+        <div class="row align-items-center justify-content-center h-100">
+            <div class="col-12 col-sm-10 col-md-6 col-lg-6 mx-auto d-none d-md-block">
+                <div class="login-slider owl-carousel">
+                    <img th:src="@{/assets/img/welcome/login-1.svg}">
+                    <img th:src="@{/assets/img/welcome/login-2.svg}">
+                    <img th:src="@{/assets/img/welcome/login-3.svg}">
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="appo-modal py-4 p-lg-4">
+                    <div th:if="${param.error}" class="alert alert-danger mb-3">Datos Incorrectos. Verificalos!</div>
+                    <div class="modal-content">
+                        <div class="modal-body" style="text-align: right;">
+                            <form class="login-form signup-form" id="loginform" method="post"
+                                  th:action="@{/auth/login-post}">
+
+                                <div class="profile-login mb-2 p-4">
+                                    <span class="bg-white p-2">Inicio de Sesion</span>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3"><i
+                                                    class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Correo"
+                                           aria-label="Username" aria-describedby="basic-addon3" name="username"
+                                           id="username" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon5"><i
+                                                    class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Contraseña"
+                                           aria-label="Password" aria-describedby="basic-addon5" name="password"
+                                           id="password">
+                                </div>
+                                <div class="custom-control custom-checkbox d-flex my-4">
+                                    <div class="remember">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <span><a th:href="@{https://www.facebook.com/UMBTenangoDelValleMx}">@UMB
+                                                    Tenango del Valle</a></span>
+                                    </div>
+                                    <div class="forgot-password ml-auto">
+                                        <i class="fab fa-twitter"></i>
+                                        <span><a th:href="@{https://twitter.com/UMB_Tenango}">@UMB_Tenango</a></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3" style="text-align: center;">
+                                    <input type="submit" class="btn btn-primary" value="Iniciar Sesion">
+                                    <br>
+                                    <span><a th:href="@{/auth/sign-up}">Registrarme</a></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** All jQuery Plugins ***** -->
+
+<!-- Generales -->
+<script th:replace="layouts/ScriptLayout:: script"></script>
+</body>
+
+</html>

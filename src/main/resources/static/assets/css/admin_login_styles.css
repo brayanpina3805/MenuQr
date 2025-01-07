@@ -1,0 +1,107 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Evitar scroll horizontal */
+}
+
+/* Estructura general */
+.header,
+.footer {
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff8c00; /* Color naranja */
+}
+
+.footer {
+    background-color: #ff8c00; /* Color naranja para el footer */
+}
+
+.login-container {
+    display: flex;
+    height: calc(100vh - 100px); /* Resta altura del header y footer */
+}
+
+.left-image {
+    flex: 1; /* La imagen ocupará la mitad del espacio */
+    background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxsb2dpbnxlbnwwfHx8fDE2ODg5MzU0NzA&ixlib=rb-4.0.3&q=80&w=1080');
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+    background-position: center;
+}
+
+.login-form {
+    flex: 1; /* La parte del formulario también ocupará la mitad */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px; /* Ancho máximo del formulario */
+}
+
+.form-container h2 {
+    margin-top: 0;
+    color: #ff8c00; /* Título en naranja */
+}
+
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-field input {
+    width: 100%; /* Asegura que los campos de entrada ocupen todo el ancho */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para el botón */
+.form-container button {
+    background-color: #ff8c00; /* Color naranja */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s, transform 0.2s; /* Efectos de transición */
+    width: 100%; /* Asegura que el botón ocupe todo el ancho del contenedor */
+}
+
+.form-container button:hover {
+    background-color: #e07b00; /* Color más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    }
+
+    .left-image {
+        height: 200px; /* Ajusta la altura para pantallas pequeñas */
+    }
+
+    .form-container {
+        padding: 20px; /* Menos espacio en pantallas pequeñas */
+    }
+}

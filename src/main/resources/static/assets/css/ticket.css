@@ -1,0 +1,17 @@
+.ticket-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ticket-item:last-child {
+    border-bottom: none;
+}
+
+.ticket-item h5 {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.ticket-item p {
+    margin: 5px 0;
+}

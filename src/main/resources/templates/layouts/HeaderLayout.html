@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+
+<head>
+
+</head>
+
+<body>
+<header class="section header-area">
+    <div id="appo-header" class="main-header-area">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="#">
+                    <img class="logo" th:src="@{/assets/img/logoColibri.png}" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appo-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="appo-menu">
+                    <ul class="navbar-nav header-items ml-auto">
+                        <li class="nav-item" th:if="${session.usuario.usuTipo.getCatUsuId() != 2}">
+                            <a class="nav-link" th:href="@{/private/administrar}">Configuracion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="pedidos.html"
+                               th:if="${session.usuario.usuTipo.getCatUsuId() != 2}"
+                               th:href="@{/private/administrarPedido}">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" th:if="${session.usuario.usuTipo.getCatUsuId() == 2}" href="#bebidas">Bebidas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll"  th:if="${session.usuario.usuTipo.getCatUsuId() == 2}" href="#combos">Promociones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll"  th:if="${session.usuario.usuTipo.getCatUsuId() == 2}" href="#team">Comentarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  th:if="${session.usuario.usuTipo.getCatUsuId() == 2}" href="#" data-toggle="modal" data-target=".pedido">Mi Pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#contact"  th:if="${session.usuario.usuTipo.getCatUsuId() == 2}">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="pantallaPrincipal.html"
+                               th:if="${session.usuario.usuTipo.getCatUsuId() != 2}"
+                               th:href="@{/private/pantallaPrin}">Pantalla Principal</a>
+                        </li>
+                        <form th:action="@{/logout}" th:method="post">
+                            <li class="nav-item">
+                                <button type="submit" class="btn btn-info">Salir</button>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+</body>
+
+</html>
