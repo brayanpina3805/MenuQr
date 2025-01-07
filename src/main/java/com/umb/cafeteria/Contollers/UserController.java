@@ -1,6 +1,5 @@
 package com.umb.cafeteria.Contollers;
 
-import com.umb.cafeteria.Entity.CatAula;
 import com.umb.cafeteria.Entity.CatEstatusUsu;
 import com.umb.cafeteria.Entity.CatTipoUsu;
 import com.umb.cafeteria.Entity.Usuario;
@@ -43,15 +42,14 @@ public class UserController {
             @RequestParam String nombre,
             @RequestParam String correo,
             @RequestParam int usuTipo,
-            @RequestParam int usuEst,
-            @RequestParam int usuAula) {
+            @RequestParam int usuEst
+    ) {
 
         Map<String, Object> response = new HashMap<>();
 
         Usuario usuario = usuarioService.findByUsuId(usuId);
         usuario.setNombre(nombre);
         usuario.setCorreo(correo);
-        usuario.setUsuAula(new CatAula(usuAula));
         usuario.setUsuTipo(new CatTipoUsu(usuTipo));
         usuario.setUsuEst(new CatEstatusUsu(usuEst));
         usuarioService.actualizarUsuario(usuario);

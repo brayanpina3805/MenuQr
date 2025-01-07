@@ -7,8 +7,9 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name ="usuario")
+@Table(name = "usuario")
 public class Usuario implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usu_id")
@@ -22,27 +23,22 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "usu_est")
     private CatEstatusUsu usuEst;
 
-    @ManyToOne
-    @JoinColumn(name ="usu_aula")
-    private CatAula usuAula;
-
     private String nombre;
 
     private String correo;
 
     private String contrasena;
 
-    public Usuario(Integer usuId, CatTipoUsu usuTipo, CatEstatusUsu usuEst, CatAula usuAula, String nombre, String correo, String contrasena) {
+    public Usuario(Integer usuId, CatTipoUsu usuTipo, CatEstatusUsu usuEst, String nombre, String correo, String contrasena) {
         this.usuId = usuId;
         this.usuTipo = usuTipo;
         this.usuEst = usuEst;
-        this.usuAula = usuAula;
         this.nombre = nombre;
         this.correo = correo;
         this.contrasena = contrasena;
     }
 
-    public Usuario(){
+    public Usuario() {
 
     }
 
@@ -72,14 +68,6 @@ public class Usuario implements Serializable {
 
     public void setUsuEst(CatEstatusUsu usuEst) {
         this.usuEst = usuEst;
-    }
-
-    public CatAula getUsuAula() {
-        return usuAula;
-    }
-
-    public void setUsuAula(CatAula usuAula) {
-        this.usuAula = usuAula;
     }
 
     public String getNombre() {
