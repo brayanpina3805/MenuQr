@@ -1,0 +1,100 @@
+/* Estilos para el Modal */
+.modal {
+    display: none; /* Escondido por defecto */
+    position: fixed;
+    z-index: 1; /* Sitúa el modal sobre el contenido */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
+    overflow: auto; /* Habilita scroll si es necesario */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+    max-width: 400px; /* Máximo ancho del modal */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Título del Modal */
+.modal-content h2 {
+    color: #ff8c00; /* Título en naranja oscuro */
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #ff8c00; /* Barra naranja debajo del título */
+}
+
+/* Barra encima de los botones */
+.modal-buttons {
+    margin-top: 20px;
+    border-top: 3px solid #ff8c00; /* Barra naranja encima de los botones */
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Espacio entre los botones */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo de los botones */
+button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Botón de Guardar Cambios */
+.save-button {
+    background-color: #0091ea; /* Azul claro */
+    width: 48%; /* Ajustar tamaño para espacio entre botones */
+}
+
+.save-button:hover {
+    background-color: #00b0ff;
+}
+
+/* Botón de Cerrar */
+.close-button {
+    background-color: #e74c3c; /* Rojo */
+    width: 48%; /* Ajustar tamaño para espacio entre botones */
+}
+
+.close-button:hover {
+    background-color: #c0392b;
+}
+
+/* Estilos para el formulario */
+.product-list {
+    margin-bottom: 20px;
+}
+
+.product-list label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-list input {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Para incluir padding y border en el ancho total */
+    background-color: #f9f3e0; /* Color de fondo claro similar al naranja */
+}
+
+.product-list input:focus {
+    border-color: #ff8c00; /* Resalta el borde al hacer focus */
+    outline: none;
+}

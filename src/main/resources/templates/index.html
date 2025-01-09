@@ -1,47 +1,252 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml"
+    class="no-js"
+    lang="en"
+    >
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Administrar Menú</title>
+        <link rel="stylesheet" th:href="@{/assets/css/admin_menu_styles.css}" />
+        <link rel="stylesheet" th:href="@{/assets/css/modal_admin.css}" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Menú</title>
-    <link rel="stylesheet" th:href="@{/assets/css/admin_menu_styles.css}">
-</head>
+    <body>
+        <div class="header">
+            <h1>Administrar Menú</h1>
+        </div>
 
-<body>
-    <div class="header">
-        <h1>Administrar Menú</h1>
-    </div>
+        <div class="admin-menu-container">
+            <div class="admin-menu">
+                <h2>
+                    Elementos del Menú
+                    <button class="add-button" onclick="openModal('', 'add')">
+                        Agregar
+                    </button>
+                </h2>
 
-    <div class="admin-menu-container">
-        <div class="admin-menu">
-            <h2>Elementos del Menú</h2>
-            <div class="menu-item">
-                <span>Opción 1</span>
-                <button>Editar</button>
-            </div>
-            <div class="menu-item">
-                <span>Opción 2</span>
-                <button>Editar</button>
-            </div>
-            <div class="menu-item">
-                <span>Opción 3</span>
-                <button>Editar</button>
-            </div>
-            <div class="menu-item">
-                <span>Opción 4</span>
-                <button>Editar</button>
-            </div>
-            <div class="menu-item">
-                <span>Opción 5</span>
-                <button>Editar</button>
+                <!-- Títulos de las categorías -->
+                <div class="menu-titles">
+                    <button class="menu-title" onclick="toggleCategory('todos')">
+                        Todos
+                    </button>
+                    <button class="menu-title" onclick="toggleCategory('bebidas')">
+                        Bebidas
+                    </button>
+                    <button class="menu-title" onclick="toggleCategory('comida')">
+                        Comida
+                    </button>
+                </div>
+
+                <!-- Sección Todos -->
+                <div class="category" id="todos">
+                    <div class="menu-item" th:each="pP : ${productosGenerales}">
+                        <span th:text="${pP.getNombre()}"></span>
+                        <div class="button-container">
+                            <button
+                                class="edit-button"
+                                onclick="openModal('Producto 1', 'edit')"
+                                >
+                                Editar
+                            </button>
+                            <button
+                                class="delete-button"
+                                onclick="confirmDelete('Producto 1')"
+                                >
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Bebidas -->
+                <div class="category" id="bebidas">
+                    <div class="menu-item" th:each="pP : ${prodBebidas}">
+                        <span th:text="${pP.getNombre()}"></span>
+                        <div class="button-container">
+                            <button
+                                class="edit-button"
+                                onclick="openModal('Bebida 1', 'edit')"
+                                >
+                                Editar
+                            </button>
+                            <button class="delete-button" onclick="confirmDelete('Bebida 1')">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Comida -->
+                <div class="category" id="comida">
+                    <div class="menu-item" th:each="pP : ${prodComida}">
+                        <span th:text="${pP.getNombre()}"></span>
+                        <div class="button-container">
+                            <button
+                                class="edit-button"
+                                onclick="openModal('Comida 1', 'edit')"
+                                >
+                                Editar
+                            </button>
+                            <button class="delete-button" onclick="confirmDelete('Comida 1')">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <span>Comida 2</span>
+                        <div class="button-container">
+                            <button
+                                class="edit-button"
+                                onclick="openModal('Comida 2', 'edit')"
+                                >
+                                Editar
+                            </button>
+                            <button class="delete-button" onclick="confirmDelete('Comida 2')">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
-    </div>
-</body>
+        <!-- Modal para editar/agregar producto -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <!-- Título del Modal -->
+                <h2 id="modalTitle">Editar Producto</h2>
 
+                <!-- Barra de separación debajo del título -->
+                <div class="modal-separator"></div>
+
+                <!-- Formulario -->
+                <div class="product-list">
+                    <form method="post">
+                        <label for="product-name">Nombre del Producto:</label>
+                        <input type="text" id="product-name" name="product-name" />
+
+                        <label for="product-description">Descripción del Producto:</label>
+                        <textarea
+                            id="product-description"
+                            name="product-description"
+                            rows="3"
+                            placeholder="Ingrese una descripción..."
+                            ></textarea>
+
+                        <label for="product-price">Precio del Producto:</label>
+                        <input
+                            type="text"
+                            id="product-price"
+                            name="product-price"
+                            placeholder="Ejemplo: 99.99"
+                            />
+
+                        <label for="product-type">Tipo de Producto:</label>
+                        <select id="tipoProd"  name="tipoProd">
+                            <option value="" disabled="">-- Selecciona una opcion --</option>
+                            <option th:each="p : ${tipoProd}" th:value="${p.getCatTipoProd}"
+                                    th:text="${p.getCatTipoProd + ' - ' + p.getDescripcion}"></option>
+                        </select>
+
+                        <label for="product-status">Estado del Producto:</label>
+                        <select id="product-status" name="product-status">
+                            <option value="" disabled="">-- Selecciona una opcion --</option>
+                            <option th:each="p : ${estProd}" th:value="${p.getCatEstId}"
+                                    th:text="${p.getCatEstId + ' - ' + p.getDescripcion}"></option>
+                        </select>
+                    </form>
+
+                    <!-- Botones Guardar y Cerrar -->
+                    <div class="modal-buttons">
+                        <button class="save-button" onclick="saveChanges()">
+                            Guardar Cambios
+                        </button>
+                        <button class="close-button" onclick="closeModal()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
+            </div>
+
+            <script>
+                // Función para mostrar/ocultar categorías al hacer click
+                function toggleCategory(category) {
+                    // Ocultar todas las categorías
+                    document.getElementById("todos").style.display = "none";
+                    document.getElementById("bebidas").style.display = "none";
+                    document.getElementById("comida").style.display = "none";
+
+                    // Mostrar solo la categoría seleccionada
+                    document.getElementById(category).style.display = "block";
+                }
+
+                // Mostrar todos los productos por defecto
+                window.onload = function () {
+                    toggleCategory("todos");
+                };
+
+                // Cerrar el modal si el usuario hace clic fuera de él
+                window.onclick = function (event) {
+                    if (event.target == document.getElementById("editModal")) {
+                        closeModal();
+                    }
+                };
+            </script>
+            <script>
+                // Función para abrir el modal de edición o agregar
+                function openModal(productName, action) {
+                    document.getElementById("editModal").style.display = "block";
+
+                    if (action === "edit") {
+                        document.getElementById("modalTitle").innerText = "Editar Producto";
+                        document.getElementById("product-name").value = productName;
+                    } else {
+                        document.getElementById("modalTitle").innerText = "Agregar Producto";
+                        document.getElementById("product-name").value = "";
+                    }
+                }
+
+                // Función para cerrar el modal
+                function closeModal() {
+                    document.getElementById("editModal").style.display = "none";
+                }
+
+                // Función para guardar cambios
+                function saveChanges() {
+                    const productName = document.getElementById("product-name").value;
+                    const modalTitle = document.getElementById("modalTitle").innerText; // Obtenemos el título del modal
+
+                    // Verifica si estamos en modo "Agregar" o "Editar"
+                    if (modalTitle === "Agregar Producto") {
+                        alert("Producto guardado correctamente: " + productName); // Mensaje para producto agregado
+                    } else if (modalTitle === "Editar Producto") {
+                        alert("Producto actualizado correctamente: " + productName); // Mensaje para producto editado
+                    }
+
+                    closeModal(); // Cerrar el modal después de guardar
+                }
+            </script>
+            <script>
+                // Función para confirmar eliminación
+                function confirmDelete(productName) {
+                    const isConfirmed = confirm(
+                            `¿Estás seguro de que deseas eliminar el producto: ${productName}?`
+                            );
+
+                    if (isConfirmed) {
+                        // Aquí puedes agregar la lógica para eliminar el producto, como eliminar de la base de datos, etc.
+                        alert(`El producto "${productName}" ha sido eliminado.`);
+                    } else {
+                        alert(
+                                `La eliminación del producto "${productName}" ha sido cancelada.`
+                                );
+                    }
+                }
+            </script>
+    </body>
 </html>
