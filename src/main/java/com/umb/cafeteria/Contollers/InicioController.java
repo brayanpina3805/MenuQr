@@ -1,6 +1,5 @@
 package com.umb.cafeteria.Contollers;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,7 +9,7 @@ public class InicioController {
     @GetMapping("/")
     public String inicio() {
 
-        return "login";
+        return "qr";
     }
 
     @GetMapping("public/index")

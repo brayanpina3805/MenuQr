@@ -72,29 +72,47 @@ button {
     background-color: #c0392b;
 }
 
-/* Estilos para el formulario */
-.product-list {
-    margin-bottom: 20px;
+/* Restablecer estilos de formularios */
+form {
+    margin: 0;
+    padding: 0;
 }
 
-.product-list label {
+/* Contenedor del formulario */
+.product-list {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+    gap: 15px; /* Espaciado consistente entre los elementos */
+}
+
+/* Estilos específicos para los elementos del formulario */
+form label {
     font-size: 16px;
     margin-bottom: 5px;
     color: #333;
     font-weight: bold;
+    display: block;
 }
 
-.product-list input {
+form input, form textarea, form select {
     padding: 10px;
     font-size: 16px;
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Para incluir padding y border en el ancho total */
-    background-color: #f9f3e0; /* Color de fondo claro similar al naranja */
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+    background-color: #f9f3e0; /* Color de fondo claro */
+    margin-bottom: 15px; /* Espaciado entre los campos */
 }
 
-.product-list input:focus {
-    border-color: #ff8c00; /* Resalta el borde al hacer focus */
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #ff8c00; /* Resalta el borde */
     outline: none;
+}
+
+/* Estilos específicos para textarea */
+form textarea {
+    resize: none; /* Deshabilita el redimensionamiento */
+    height: auto;
 }

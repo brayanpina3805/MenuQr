@@ -16,15 +16,14 @@
     <body>
         <div class="header">
             <h1>Administrar Menú</h1>
+            <button class="logout-button" onclick="logout()">Salir</button>
         </div>
 
         <div class="admin-menu-container">
             <div class="admin-menu">
                 <h2>
                     Elementos del Menú
-                    <button class="add-button" onclick="openModal('', 'add')">
-                        Agregar
-                    </button>
+                    <button class="add-button" onclick="openAddModal()">Agregar</button>
                 </h2>
 
                 <!-- Títulos de las categorías -->
@@ -42,13 +41,10 @@
 
                 <!-- Sección Todos -->
                 <div class="category" id="todos">
-                    <div class="menu-item" th:each="pP : ${productosGenerales}">
-                        <span th:text="${pP.getNombre()}"></span>
+                    <div class="menu-item"  th:each="pP : ${productosGenerales}">
+                        <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button
-                                class="edit-button"
-                                onclick="openModal('Producto 1', 'edit')"
-                                >
+                            <button class="edit-button" onclick="openEditModal('Producto 1')">
                                 Editar
                             </button>
                             <button
@@ -63,16 +59,16 @@
 
                 <!-- Sección Bebidas -->
                 <div class="category" id="bebidas">
-                    <div class="menu-item" th:each="pP : ${prodBebidas}">
-                        <span th:text="${pP.getNombre()}"></span>
+                    <div class="menu-item"  th:each="pP : ${prodBebidas}">
+                        <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button
-                                class="edit-button"
-                                onclick="openModal('Bebida 1', 'edit')"
-                                >
+                            <button class="edit-button" onclick="openEditModal('Producto 1')">
                                 Editar
                             </button>
-                            <button class="delete-button" onclick="confirmDelete('Bebida 1')">
+                            <button
+                                class="delete-button"
+                                onclick="confirmDelete('Producto 1')"
+                                >
                                 Eliminar
                             </button>
                         </div>
@@ -81,30 +77,16 @@
 
                 <!-- Sección Comida -->
                 <div class="category" id="comida">
-                    <div class="menu-item" th:each="pP : ${prodComida}">
-                        <span th:text="${pP.getNombre()}"></span>
+                    <div class="menu-item"  th:each="pP : ${prodComida}">
+                        <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button
-                                class="edit-button"
-                                onclick="openModal('Comida 1', 'edit')"
-                                >
+                            <button class="edit-button" onclick="openEditModal('Producto 1')">
                                 Editar
                             </button>
-                            <button class="delete-button" onclick="confirmDelete('Comida 1')">
-                                Eliminar
-                            </button>
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <span>Comida 2</span>
-                        <div class="button-container">
                             <button
-                                class="edit-button"
-                                onclick="openModal('Comida 2', 'edit')"
+                                class="delete-button"
+                                onclick="confirmDelete('Producto 1')"
                                 >
-                                Editar
-                            </button>
-                            <button class="delete-button" onclick="confirmDelete('Comida 2')">
                                 Eliminar
                             </button>
                         </div>
@@ -113,140 +95,178 @@
             </div>
         </div>
 
-        <!-- Modal para editar/agregar producto -->
-        <div id="editModal" class="modal">
+        <!-- Modal para agregar producto -->
+        <div id="addModal" class="modal">
             <div class="modal-content">
-                <!-- Título del Modal -->
-                <h2 id="modalTitle">Editar Producto</h2>
-
-                <!-- Barra de separación debajo del título -->
+                <h2>Agregar Producto</h2>
                 <div class="modal-separator"></div>
-
-                <!-- Formulario -->
                 <div class="product-list">
-                    <form method="post">
-                        <label for="product-name">Nombre del Producto:</label>
-                        <input type="text" id="product-name" name="product-name" />
+                    <form id="agregarProductp" method="post">
+                        <label for="add-product-name">Nombre del Producto:</label>
+                        <input type="text" id="add-product-name" name="add-product-name" />
 
-                        <label for="product-description">Descripción del Producto:</label>
+                        <label for="add-product-description">Descripción del Producto:</label>
                         <textarea
-                            id="product-description"
-                            name="product-description"
+                            id="add-product-description"
+                            name="add-product-description"
                             rows="3"
                             placeholder="Ingrese una descripción..."
                             ></textarea>
 
-                        <label for="product-price">Precio del Producto:</label>
+                        <label for="add-product-price">Precio del Producto:</label>
                         <input
                             type="text"
-                            id="product-price"
-                            name="product-price"
+                            id="add-product-price"
+                            name="add-product-price"
                             placeholder="Ejemplo: 99.99"
                             />
 
-                        <label for="product-type">Tipo de Producto:</label>
-                        <select id="tipoProd"  name="tipoProd">
-                            <option value="" disabled="">-- Selecciona una opcion --</option>
-                            <option th:each="p : ${tipoProd}" th:value="${p.getCatTipoProd}"
-                                    th:text="${p.getCatTipoProd + ' - ' + p.getDescripcion}"></option>
+                        <label for="add-product-type">Tipo de Producto:</label>
+                        <select id="add-product-type" name="add-product-type">
+                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
+                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}"
+                                    th:text="${ pp.getDescripcion()}"></option>
                         </select>
 
-                        <label for="product-status">Estado del Producto:</label>
-                        <select id="product-status" name="product-status">
-                            <option value="" disabled="">-- Selecciona una opcion --</option>
-                            <option th:each="p : ${estProd}" th:value="${p.getCatEstId}"
-                                    th:text="${p.getCatEstId + ' - ' + p.getDescripcion}"></option>
+                        <label for="add-product-status">Estado del Producto:</label>
+                        <select id="add-product-status" name="add-product-status">
+                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
+                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}"
+                                    th:text="${ pp.getDescripcion()}"></option>
                         </select>
                     </form>
-
-                    <!-- Botones Guardar y Cerrar -->
-                    <div class="modal-buttons">
-                        <button class="save-button" onclick="saveChanges()">
-                            Guardar Cambios
-                        </button>
-                        <button class="close-button" onclick="closeModal()">Cerrar</button>
-                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="save-button" onclick="saveAddModal()">Guardar</button>
+                    <button class="close-button" onclick="closeModal('addModal')">
+                        Cerrar
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div class="footer">
-                <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
+        <!-- Modal para editar producto -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <h2>Editar Producto</h2>
+                <div class="modal-separator"></div>
+                <div class="product-list">
+                    <form id="editarProducto" method="post">
+                        <label for="edit-product-name">Nombre del Producto:</label>
+                        <input type="text" id="edit-product-name" name="edit-product-name" />
+
+                        <label for="edit-product-description"
+                               >Descripción del Producto:</label
+                        >
+                        <textarea
+                            id="edit-product-description"
+                            name="edit-product-description"
+                            rows="3"
+                            ></textarea>
+
+                        <label for="edit-product-price">Precio del Producto:</label>
+                        <input
+                            type="text"
+                            id="edit-product-price"
+                            name="edit-product-price"
+                            />
+
+                        <label for="edit-product-type">Tipo de Producto:</label>
+                        <select id="edit-product-type" name="edit-product-type">
+                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
+                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}"
+                                    th:text="${ pp.getDescripcion()}"></option>
+                        </select>
+
+                        <label for="edit-product-status">Estado del Producto:</label>
+                        <select id="edit-product-status" name="edit-product-status">
+                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
+                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}"
+                                    th:text="${ pp.getDescripcion()}"></option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-buttons">
+                    <button class="save-button" onclick="saveEditModal()">
+                        Guardar Cambios
+                    </button>
+                    <button class="close-button" onclick="closeModal('editModal')">
+                        Cerrar
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <script>
-                // Función para mostrar/ocultar categorías al hacer click
-                function toggleCategory(category) {
-                    // Ocultar todas las categorías
-                    document.getElementById("todos").style.display = "none";
-                    document.getElementById("bebidas").style.display = "none";
-                    document.getElementById("comida").style.display = "none";
+        <div class="footer">
+            <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
+        </div>
 
-                    // Mostrar solo la categoría seleccionada
-                    document.getElementById(category).style.display = "block";
+        <script>
+            // Mostrar categorías
+            function toggleCategory(category) {
+                const categories = document.querySelectorAll(".category");
+                categories.forEach((cat) => (cat.style.display = "none"));
+                document.getElementById(category).style.display = "block";
+            }
+
+            // Mostrar todos los productos por defecto
+            window.onload = function () {
+                toggleCategory("todos");
+            };
+
+            // Abrir modal de agregar
+            function openAddModal() {
+                document.getElementById("addModal").style.display = "block";
+            }
+
+            // Abrir modal de editar
+            function openEditModal(productName) {
+                document.getElementById("editModal").style.display = "block";
+                document.getElementById("edit-product-name").value = productName;
+            }
+
+            // Cerrar modal
+            function closeModal(modalId) {
+                document.getElementById(modalId).style.display = "none";
+            }
+
+            // Guardar nuevo producto
+            function saveAddModal() {
+                const productName = document.getElementById("add-product-name").value;
+                alert(`Producto agregado correctamente: ${productName}`);
+                closeModal("addModal");
+            }
+
+            // Guardar cambios en producto
+            function saveEditModal() {
+                const productName = document.getElementById("edit-product-name").value;
+                alert(`Producto actualizado correctamente: ${productName}`);
+                closeModal("editModal");
+            }
+
+            // Confirmar eliminación
+            function confirmDelete(productName) {
+                if (
+                        confirm(
+                                `¿Estás seguro de que deseas eliminar el producto: ${productName}?`
+                                )
+                        ) {
+                    alert(`El producto "${productName}" ha sido eliminado.`);
                 }
+            }
+        </script>
 
-                // Mostrar todos los productos por defecto
-                window.onload = function () {
-                    toggleCategory("todos");
-                };
+        <script>
+            function logout() {
+                // Crear un formulario dinámico para hacer el POST Salir
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/logout';
 
-                // Cerrar el modal si el usuario hace clic fuera de él
-                window.onclick = function (event) {
-                    if (event.target == document.getElementById("editModal")) {
-                        closeModal();
-                    }
-                };
-            </script>
-            <script>
-                // Función para abrir el modal de edición o agregar
-                function openModal(productName, action) {
-                    document.getElementById("editModal").style.display = "block";
-
-                    if (action === "edit") {
-                        document.getElementById("modalTitle").innerText = "Editar Producto";
-                        document.getElementById("product-name").value = productName;
-                    } else {
-                        document.getElementById("modalTitle").innerText = "Agregar Producto";
-                        document.getElementById("product-name").value = "";
-                    }
-                }
-
-                // Función para cerrar el modal
-                function closeModal() {
-                    document.getElementById("editModal").style.display = "none";
-                }
-
-                // Función para guardar cambios
-                function saveChanges() {
-                    const productName = document.getElementById("product-name").value;
-                    const modalTitle = document.getElementById("modalTitle").innerText; // Obtenemos el título del modal
-
-                    // Verifica si estamos en modo "Agregar" o "Editar"
-                    if (modalTitle === "Agregar Producto") {
-                        alert("Producto guardado correctamente: " + productName); // Mensaje para producto agregado
-                    } else if (modalTitle === "Editar Producto") {
-                        alert("Producto actualizado correctamente: " + productName); // Mensaje para producto editado
-                    }
-
-                    closeModal(); // Cerrar el modal después de guardar
-                }
-            </script>
-            <script>
-                // Función para confirmar eliminación
-                function confirmDelete(productName) {
-                    const isConfirmed = confirm(
-                            `¿Estás seguro de que deseas eliminar el producto: ${productName}?`
-                            );
-
-                    if (isConfirmed) {
-                        // Aquí puedes agregar la lógica para eliminar el producto, como eliminar de la base de datos, etc.
-                        alert(`El producto "${productName}" ha sido eliminado.`);
-                    } else {
-                        alert(
-                                `La eliminación del producto "${productName}" ha sido cancelada.`
-                                );
-                    }
-                }
-            </script>
+                // Enviar el formulario de manera automática
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
     </body>
 </html>

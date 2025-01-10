@@ -30,3 +30,55 @@ body, html {
     padding: 20px;
     text-align: center;
 }
+
+
+/* Estilo del enlace que se verá como un botón */
+.nav-link {
+    display: block; /* Asegura que el enlace sea un bloque */
+    background-color: #ff8c00;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%; /* Ocupa el 100% del contenedor */
+    max-width: 300px; /* Ancho máximo para no hacerlo demasiado grande */
+}
+
+.nav-link:hover {
+    background-color: #ff8c00;
+    transform: translateY(-3px); /* Efecto de desplazamiento al hacer hover */
+}
+
+.nav-link:active {
+    transform: translateY(0); /* Efecto de "presionar" el botón */
+}
+
+/* Estilo del botón Acceder */
+.access-button {
+    background-color: #ff8c00; /* Cambiar color a naranja */
+    color: white;
+    padding: 12px 40px; /* Aumentar el tamaño del botón */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 16px;
+    width: 250px; /* Hacer el botón más largo */
+    text-align: center; /* Centrar el texto dentro del botón */
+    border: none; /* Eliminar borde */
+    outline: none; /* Eliminar contorno (margen negro al hacer clic) */
+}
+
+.access-button:hover {
+    background-color: #ff8c00; /* El mismo color para el hover */
+    transform: translateY(-3px); /* Efecto de desplazamiento al hacer hover */
+}
+
+.access-button:active {
+    transform: translateY(0); /* Efecto de "presionar" el botón */
+}
