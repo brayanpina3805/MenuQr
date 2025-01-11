@@ -25,6 +25,13 @@ public class CatEstatusProd implements Serializable {
 
     private String descripcion;
 
+    public CatEstatusProd(Integer catEstId) {
+        this.catEstId = catEstId;
+    }
+
+    public CatEstatusProd() {
+    }
+
     public Integer getCatEstId() {
         return catEstId;
     }

@@ -22,4 +22,8 @@ public interface IProductoDao extends JpaRepository<Producto, Integer> {
     public List<Producto> findByProdTipo(CatTipoProd id);
 
     public void deleteByIdProd(int id);
+
+    public Producto findByNombre(String nombre);
+
+    public Producto findByIdProd(int id);
 }

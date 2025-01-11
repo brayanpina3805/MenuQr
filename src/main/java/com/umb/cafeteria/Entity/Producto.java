@@ -1,4 +1,3 @@
-
 package com.umb.cafeteria.Entity;
 
 import java.io.Serializable;
@@ -39,6 +38,18 @@ public class Producto implements Serializable {
     private String descripcion;
 
     private float precio;
+
+    public Producto(CatEstatusProd prosEst, CatTipoProd prodTipo, String nombre, String descripcion, float precio) {
+        this.prosEst = prosEst;
+        this.prodTipo = prodTipo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
+    public Producto() {
+
+    }
 
     //Getters and setters
     public Integer getIdProd() {

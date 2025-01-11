@@ -1,0 +1,49 @@
+/* Estilo común para las alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeOut 2s forwards; /* Efecto de desvanecimiento */
+}
+
+/* Estilo para alertas de error */
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Estilo para alertas de éxito */
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+/* Efecto de desvanecimiento */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Aplicar el mismo estilo y animación a #alert-container-edit */
+#alert-container, #alert-container-edit {
+    width: 100%;
+}
+
+/* Asegurar que las alertas dentro de los contenedores se vean adecuadamente */
+#alert-container .alert, #alert-container-edit .alert {
+    animation: fadeOut 2s forwards; /* Efecto de desvanecimiento */
+}

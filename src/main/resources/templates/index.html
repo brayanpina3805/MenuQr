@@ -11,6 +11,7 @@
         <title>Administrar Menú</title>
         <link rel="stylesheet" th:href="@{/assets/css/admin_menu_styles.css}" />
         <link rel="stylesheet" th:href="@{/assets/css/modal_admin.css}" />
+        <link rel="stylesheet" th:href="@{/assets/css/alertaProductos.css}" />
     </head>
 
     <body>
@@ -41,33 +42,34 @@
 
                 <!-- Sección Todos -->
                 <div class="category" id="todos">
-                    <div class="menu-item"  th:each="pP : ${productosGenerales}">
+                    <div class="menu-item" th:each="pP : ${productosGenerales}">
                         <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button class="edit-button" onclick="openEditModal('Producto 1')">
+                            <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
-                            <button
-                                class="delete-button"
-                                onclick="confirmDelete('Producto 1')"
-                                >
+                            <button class="delete-button"
+                                    th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
+                                    >
                                 Eliminar
                             </button>
                         </div>
                     </div>
                 </div>
 
+
+
                 <!-- Sección Bebidas -->
                 <div class="category" id="bebidas">
                     <div class="menu-item"  th:each="pP : ${prodBebidas}">
                         <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button class="edit-button" onclick="openEditModal('Producto 1')">
+                            <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
                             <button
                                 class="delete-button"
-                                onclick="confirmDelete('Producto 1')"
+                                th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
                                 >
                                 Eliminar
                             </button>
@@ -80,12 +82,12 @@
                     <div class="menu-item"  th:each="pP : ${prodComida}">
                         <span th:text="${pP.getNombre()}"> </span>
                         <div class="button-container">
-                            <button class="edit-button" onclick="openEditModal('Producto 1')">
+                            <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
                             <button
                                 class="delete-button"
-                                onclick="confirmDelete('Producto 1')"
+                                th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
                                 >
                                 Eliminar
                             </button>
@@ -98,108 +100,207 @@
         <!-- Modal para agregar producto -->
         <div id="addModal" class="modal">
             <div class="modal-content">
+
+                <div id="alert-container" ></div> <!-- Asegúrate de que esto esté en tu HTML -->
                 <h2>Agregar Producto</h2>
                 <div class="modal-separator"></div>
                 <div class="product-list">
-                    <form id="agregarProductp" method="post">
-                        <label for="add-product-name">Nombre del Producto:</label>
-                        <input type="text" id="add-product-name" name="add-product-name" />
+                    <form id="agregarProducto" method="post" action="/private/agregar">
+                        <label for="nombre">Nombre del Producto:</label>
+                        <input type="text" id="nombre" name="nombre" required />
 
-                        <label for="add-product-description">Descripción del Producto:</label>
-                        <textarea
-                            id="add-product-description"
-                            name="add-product-description"
-                            rows="3"
-                            placeholder="Ingrese una descripción..."
-                            ></textarea>
+                        <label for="descripcion">Descripción del Producto:</label>
+                        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Ingrese una descripción..." required></textarea>
 
-                        <label for="add-product-price">Precio del Producto:</label>
-                        <input
-                            type="text"
-                            id="add-product-price"
-                            name="add-product-price"
-                            placeholder="Ejemplo: 99.99"
-                            />
+                        <label for="precio">Precio del Producto:</label>
+                        <input type="text" id="precio" name="precio" placeholder="Ejemplo: 99.99" required />
 
-                        <label for="add-product-type">Tipo de Producto:</label>
-                        <select id="add-product-type" name="add-product-type">
-                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
-                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}"
-                                    th:text="${ pp.getDescripcion()}"></option>
+                        <label for="tipoId">Tipo de Producto:</label>
+                        <select id="tipoId" name="tipoId" required>
+                            <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}" th:text="${pp.getDescripcion()}"></option>
                         </select>
 
-                        <label for="add-product-status">Estado del Producto:</label>
-                        <select id="add-product-status" name="add-product-status">
-                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
-                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}"
-                                    th:text="${ pp.getDescripcion()}"></option>
+                        <label for="estadoId">Estado del Producto:</label>
+                        <select id="estadoId" name="estadoId" required>
+                            <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}" th:text="${pp.getDescripcion()}"></option>
                         </select>
                     </form>
                 </div>
                 <div class="modal-buttons">
-                    <button class="save-button" onclick="saveAddModal()">Guardar</button>
-                    <button class="close-button" onclick="closeModal('addModal')">
-                        Cerrar
-                    </button>
+                    <button type="button" class="save-button" onclick="guardarProducto()">Guardar</button>
+                    <button class="close-button" onclick="closeModal('addModal')">Cerrar</button>
                 </div>
             </div>
         </div>
 
         <!-- Modal para editar producto -->
+        <!-- Modal para editar producto -->
         <div id="editModal" class="modal">
             <div class="modal-content">
+
+                <div id="alert-container-edit" class="alert-container"></div> <!-- Asegúrate de que esto esté en tu HTML -->
                 <h2>Editar Producto</h2>
                 <div class="modal-separator"></div>
                 <div class="product-list">
-                    <form id="editarProducto" method="post">
-                        <label for="edit-product-name">Nombre del Producto:</label>
-                        <input type="text" id="edit-product-name" name="edit-product-name" />
+                    <form id="editarProducto" method="post" action="/private/actualizarProducto">
+                        <!-- Campo oculto para el ID del producto -->
+                        <input hidden="true" id="edit-product-id" name="idProd" />
 
-                        <label for="edit-product-description"
-                               >Descripción del Producto:</label
-                        >
-                        <textarea
-                            id="edit-product-description"
-                            name="edit-product-description"
-                            rows="3"
-                            ></textarea>
+                        <label for="edit-product-name">Nombre del Producto:</label>
+                        <input type="text" id="edit-product-name" name="nombre" required />
+
+                        <label for="edit-product-description">Descripción del Producto:</label>
+                        <textarea id="edit-product-description" name="descripcion" rows="3" required></textarea>
 
                         <label for="edit-product-price">Precio del Producto:</label>
-                        <input
-                            type="text"
-                            id="edit-product-price"
-                            name="edit-product-price"
-                            />
+                        <input type="text" id="edit-product-price" name="precio" required />
 
                         <label for="edit-product-type">Tipo de Producto:</label>
-                        <select id="edit-product-type" name="edit-product-type">
-                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
-                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}"
-                                    th:text="${ pp.getDescripcion()}"></option>
+                        <select id="edit-product-type" name="tipoId" required>
+                            <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option th:each="pp : ${tipoProd}" th:value="${pp.getCatTipoProd()}" th:text="${pp.getDescripcion()}"></option>
                         </select>
 
                         <label for="edit-product-status">Estado del Producto:</label>
-                        <select id="edit-product-status" name="edit-product-status">
-                            <option value="" disabled="" selected="">-- Selecciona una opcion --</option>
-                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}"
-                                    th:text="${ pp.getDescripcion()}"></option>
+                        <select id="edit-product-status" name="estadoId" required>
+                            <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option th:each="pp : ${estProd}" th:value="${pp.getCatEstId()}" th:text="${pp.getDescripcion()}"></option>
                         </select>
+
+                        <!-- Botón para enviar los datos del formulario -->
+                        <div class="modal-buttons">
+                            <button class="save-button" type="submit">Guardar Cambios</button>
+                            <button class="close-button" type="button" onclick="closeModal('editModal')">Cerrar</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-buttons">
-                    <button class="save-button" onclick="saveEditModal()">
-                        Guardar Cambios
-                    </button>
-                    <button class="close-button" onclick="closeModal('editModal')">
-                        Cerrar
-                    </button>
                 </div>
             </div>
         </div>
 
+
         <div class="footer">
             <p>© 2024 Sistema de Menú - Todos los derechos reservados.</p>
         </div>
+
+        <script>
+
+
+            //eliminarSeleccion
+            function confirmDelete(productId) {
+                // Hacer una solicitud para obtener los detalles del producto a editar
+                const confirmar = confirm("¿Estás seguro de que deseas eliminar este producto?");
+                if (confirmar) {
+                    // Enviar solicitud de eliminación al servidor
+                    fetch('/private/eliminarProducto/' + productId, {
+                        method: 'DELETE',
+                    })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.mensaje === 'Producto eliminado correctamente') {
+                                    // Mostrar alerta de éxito
+                                    mostrarAlerta('Producto eliminado correctamente', 'success');
+                                    // Recargar la página o actualizar la lista
+                                    setTimeout(() => {
+                                        location.reload(); // Recargar la página
+                                    }, 1000);
+                                } else {
+                                    // Mostrar alerta de error
+                                    mostrarAlerta('Error al eliminar el producto', 'danger');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al eliminar el producto:', error);
+                                mostrarAlerta('Error al procesar la solicitud', 'danger');
+                            });
+                }
+            }
+
+
+
+            //editar modal
+            function openEditModal(productId) {
+                // Hacer una solicitud para obtener los detalles del producto a editar
+                fetch('/private/obtenerProducto/' + productId)
+                        .then(response => response.json())
+                        .then(producto => {
+                            console.log(producto);
+
+                            document.getElementById('edit-product-id').value = productId;
+                            document.getElementById('edit-product-name').value = producto.nombre;
+                            document.getElementById('edit-product-description').value = producto.descripcion;
+                            document.getElementById('edit-product-price').value = producto.precio;
+                            document.getElementById('edit-product-type').value = producto.prodTipo.catTipoProd;  // Asegúrate de usar prodTipo.catTipoProd
+                            document.getElementById('edit-product-status').value = producto.prosEst.catEstId;
+                            // Mostrar el modal de edición
+                            document.getElementById('editModal').style.display = "block";
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener el producto:', error);
+                            mostrarAlerta('No se pudo cargar el producto para editar', 'danger');
+                        });
+
+
+            }
+
+            // Manejar el envío del formulario
+            document.getElementById('editarProducto').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const data = {
+                    idProd: document.getElementById('edit-product-id').value,
+                    nombre: document.getElementById('edit-product-name').value,
+                    descripcion: document.getElementById('edit-product-description').value,
+                    precio: document.getElementById('edit-product-price').value,
+                    tipoId: document.getElementById('edit-product-type').value,
+                    estadoId: document.getElementById('edit-product-status').value
+                };
+
+                fetch('/private/actualizarProducto', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams(data)
+                })
+                        .then(response => response.json())
+                        .then(responseData => {
+                            if (responseData.mensaje === 'Producto actualizado correctamente') {
+                                mostrarAlertaEdit('Producto actualizado correctamente', 'success');
+                            } else {
+                                mostrarAlertaEdit(responseData.mensaje, 'danger');
+                            }
+                        })
+                        .catch(error => {
+                            mostrarAlertaEdit('Error al actualizar el producto', 'danger');
+                        });
+            });
+
+// Mostrar alerta en el modal de edición
+            function mostrarAlertaEdit(mensaje, tipo) {
+                const alertaDiv = document.createElement("div");
+                alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
+                alertaDiv.textContent = mensaje;
+
+                const alertContainer = document.getElementById("alert-container-edit");
+                alertContainer.innerHTML = ''; // Limpiar alertas previas
+                alertContainer.appendChild(alertaDiv);
+
+                // Temporizador para eliminar la alerta después de 2 segundos
+                setTimeout(() => {
+                    alertaDiv.remove();
+                    if (tipo === 'success') {
+                        // Recargar la página después de que la alerta desaparezca si es éxito
+                        setTimeout(() => {
+                            location.reload(); // Recargar página
+                        }, 1000); // Añadir un pequeño retraso antes de recargar
+                    }
+                }, 2000);
+            }
+
+
+        </script>
+
+
 
         <script>
             // Mostrar categorías
@@ -213,47 +314,79 @@
             window.onload = function () {
                 toggleCategory("todos");
             };
-
             // Abrir modal de agregar
             function openAddModal() {
                 document.getElementById("addModal").style.display = "block";
-            }
-
-            // Abrir modal de editar
-            function openEditModal(productName) {
-                document.getElementById("editModal").style.display = "block";
-                document.getElementById("edit-product-name").value = productName;
             }
 
             // Cerrar modal
             function closeModal(modalId) {
                 document.getElementById(modalId).style.display = "none";
             }
+        </script>
 
-            // Guardar nuevo producto
-            function saveAddModal() {
-                const productName = document.getElementById("add-product-name").value;
-                alert(`Producto agregado correctamente: ${productName}`);
-                closeModal("addModal");
-            }
 
-            // Guardar cambios en producto
-            function saveEditModal() {
-                const productName = document.getElementById("edit-product-name").value;
-                alert(`Producto actualizado correctamente: ${productName}`);
-                closeModal("editModal");
-            }
 
-            // Confirmar eliminación
-            function confirmDelete(productName) {
-                if (
-                        confirm(
-                                `¿Estás seguro de que deseas eliminar el producto: ${productName}?`
-                                )
-                        ) {
-                    alert(`El producto "${productName}" ha sido eliminado.`);
+
+        <script>
+            function guardarProducto() {
+                const producto = {
+                    nombre: document.getElementById('nombre').value,
+                    descripcion: document.getElementById('descripcion').value,
+                    precio: parseFloat(document.getElementById('precio').value),
+                    tipoId: parseInt(document.getElementById('tipoId').value, 10),
+                    estadoId: parseInt(document.getElementById('estadoId').value, 10)
+                };
+                // Verifica si hay campos vacíos
+                if (!producto.nombre || !producto.descripcion || !producto.precio || isNaN(producto.precio) || !producto.tipoId || !producto.estadoId) {
+                    mostrarAlerta('Por favor, complete todos los campos correctamente.', 'danger');
+                    return;
                 }
+
+                // Crear el formulario con los parámetros
+                const formData = new URLSearchParams();
+                formData.append("nombre", producto.nombre);
+                formData.append("descripcion", producto.descripcion);
+                formData.append("precio", producto.precio);
+                formData.append("tipoId", producto.tipoId);
+                formData.append("estadoId", producto.estadoId);
+                fetch('/private/agregar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded', // Tipo de contenido adecuado
+                    },
+                    body: formData.toString() // Convertir los datos a formato URLSearchParams
+                })
+                        .then(response => response.json()) // Asegúrate de que la respuesta sea JSON
+                        .then(data => {
+                            if (data.mensaje) {
+                                mostrarAlerta(data.mensaje, 'success'); // Mostrar mensaje de éxito
+                                if (data.mensaje === "Producto agregado correctamente") {
+                                    setTimeout(() => {
+                                        location.reload(); // Recargar página después de 2 segundos
+                                    }, 2000);
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            mostrarAlerta('Ocurrió un error al procesar la solicitud', 'danger');
+                        });
             }
+
+            function mostrarAlerta(mensaje, tipo) {
+                const alertaDiv = document.createElement("div");
+                alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
+                alertaDiv.textContent = mensaje;
+                const alertContainer = document.getElementById("alert-container");
+                alertContainer.innerHTML = ''; // Limpiar alertas previas
+                alertContainer.appendChild(alertaDiv);
+                // Temporizador para eliminar la alerta después de 2 segundos
+                setTimeout(() => {
+                    alertaDiv.remove();
+                }, 2000);
+            }
+
         </script>
 
         <script>
@@ -262,7 +395,6 @@
                 var form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/logout';
-
                 // Enviar el formulario de manera automática
                 document.body.appendChild(form);
                 form.submit();

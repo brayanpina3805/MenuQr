@@ -48,4 +48,14 @@ public class ProductoServiceImpl implements IProductoService {
         productoDao.deleteByIdProd(id);
     }
 
+    @Override
+    public Producto findByNombre(String nombre) {
+        return productoDao.findByNombre(nombre);
+    }
+
+    @Override
+    public Producto findByIdProd(int id) {
+        return productoDao.findByIdProd(id);
+    }
+
 }

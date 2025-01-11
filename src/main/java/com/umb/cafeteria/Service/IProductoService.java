@@ -24,4 +24,8 @@ public interface IProductoService {
 
     public void eliminarProd(int id);
 
+    public Producto findByNombre(String nombre);
+
+    public Producto findByIdProd(int id);
+
 }
