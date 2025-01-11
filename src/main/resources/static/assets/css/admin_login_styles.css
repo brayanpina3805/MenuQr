@@ -91,6 +91,18 @@ html {
     transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
 }
 
+.alert-error {
+    background-color: #ffcccc; /* Fondo rojo claro */
+    color: #b30000; /* Texto rojo oscuro */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Separación inferior */
+    text-align: center; /* Centrar el texto */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    font-weight: bold; /* Texto en negrita */
+}
+
+
 /* Responsividad */
 @media (max-width: 768px) {
     .login-container {
