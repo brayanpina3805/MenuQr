@@ -1,83 +1,116 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         PostgreSQL 14.9, compiled by Visual C++ build 1914, 64-bit
+-- SO del servidor:              
+-- HeidiSQL Versión:             12.5.0.6677
+-- --------------------------------------------------------
 
-INSERT INTO "cat_aula" ("cat_aula_id", "numero", "descripcion") VALUES
-	(1, 101, 'Ingenieria en Sistemas'),
-	(6, 102, 'Nutricion'),
-	(7, NULL, 'Inexistente');
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES  */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-INSERT INTO "cat_estatus_com" ("cat_est_id", "descripcion") VALUES
-	(4, 'PENDIENTE'),
-	(5, 'ELIMINADO'),
-	(1, 'PRINCIPAL');
-
-INSERT INTO "cat_estatus_ped" ("cat_est_id", "descripcion") VALUES
-	(2, 'EN RUTA'),
-	(3, 'ENTREGADO'),
-	(9, 'EN PREPARACION'),
-	(1, 'RECIBIDO EN TIENDA');
-
-INSERT INTO "cat_estatus_prod" ("cat_est_id", "descripcion") VALUES
-	(1, 'DISPONIBLE'),
-	(2, 'NO DISPONIBLE'),
-	(3, 'ELIMINADO');
-
+-- Volcando datos para la tabla public.cat_estatus_usu: -1 rows
+/*!40000 ALTER TABLE "cat_estatus_usu" DISABLE KEYS */;
 INSERT INTO "cat_estatus_usu" ("cat_est_id", "descripcion") VALUES
 	(1, 'ACTIVO'),
 	(2, 'INACTIVO'),
 	(3, 'BLOQUEADO'),
 	(4, ' CLIENTE CON PEDIDOS PENDIENTES'),
 	(5, 'CLIENTES CON PAGOS PENDIENTES');
+/*!40000 ALTER TABLE "cat_estatus_usu" ENABLE KEYS */;
 
-INSERT INTO "cat_tipo_prod" ("cat_prod_id", "descripcion") VALUES
-	(1, 'PRODUCTO'),
-	(2, 'BEBIDA'),
-	(3, 'PROMOCION');
+-- Volcando datos para la tabla public.cat_est_prod: -1 rows
+/*!40000 ALTER TABLE "cat_est_prod" DISABLE KEYS */;
+INSERT INTO "cat_est_prod" ("cat_est_id", "descripcion") VALUES
+	(1, 'ACTIVO'),
+	(3, 'INACTIVO'),
+	(6, 'ELIMINADO');
+/*!40000 ALTER TABLE "cat_est_prod" ENABLE KEYS */;
 
+-- Volcando datos para la tabla public.cat_tipo_prod: -1 rows
+/*!40000 ALTER TABLE "cat_tipo_prod" DISABLE KEYS */;
+INSERT INTO "cat_tipo_prod" ("cat_tipo_id", "descripcion") VALUES
+	(1, 'BEBIDAS'),
+	(3, 'COMIDA');
+/*!40000 ALTER TABLE "cat_tipo_prod" ENABLE KEYS */;
+
+-- Volcando datos para la tabla public.cat_tipo_usu: -1 rows
+/*!40000 ALTER TABLE "cat_tipo_usu" DISABLE KEYS */;
 INSERT INTO "cat_tipo_usu" ("cat_usu_id", "descripcion") VALUES
 	(1, 'ADMINISTRADOR'),
 	(2, 'CLIENTE EN LINEA'),
 	(5, 'EMPLEADO');
+/*!40000 ALTER TABLE "cat_tipo_usu" ENABLE KEYS */;
 
-INSERT INTO "comentario" ("com_id", "com_tipo", "nombre", "correo", "asunto", "mensaje") VALUES
-	(52, 5, 'BRANDON MISAEL PIÑA FLORES', 'af339150@gmail.com', 'Segundo Comentario', 'Volviendo a calar'),
-	(55, 5, 'BRANDON MISAEL PIÑA FLORES', 'brandon@umb.edomex.mx', 'Ahora si Ultimo Comentario', 'Finalmente quedo, todo funciona Bien'),
-	(53, 1, 'JESUS FRANCISCO PIÑA FLORES', 'af339150@gmail.com', 'Tercer comentario', 'Volviendo a calar paps, ya es la ultiima'),
-	(51, 4, 'ZURIEL GUTIERREZ CASTAÑEDA', 'af339150@gmail.com', 'Prueba 1', 'Calando los comentarios paps'),
-	(61, 1, 'CECILIA FLORES GALLEGOS', 'ceci@umb.edomex.mx', 'Ultimo Comentario ', 'Probando de pies a cabeza el sistema'),
-	(63, 4, 'BRANDON PEÑALOZA', 'penaloza@umb.edomex.mx', 'Segundo Comentario', 'Prueba');
+-- Volcando datos para la tabla public.producto: 38 rows
+/*!40000 ALTER TABLE "producto" DISABLE KEYS */;
+INSERT INTO "producto" ("id_prod", "prod_est", "prod_tipo", "nombre", "descripcion", "precio") VALUES
+	(6, 1, 3, 'HAMBURGUESA', 'Una hamburguesa es un emparedado que contiene, generalmente, carne picada o de origen vegetal,​ aglutinada en forma de filete cocinado a la parrilla o a la plancha,', 70),
+	(19, 1, 1, 'PIÑA COLADA', 'La piña colada es un cóctel tropical que se prepara con jugo de piña, crema de coco, ron y hielo.', 70),
+	(27, 1, 3, 'ENCHILADAS VERDES', 'Tortillas rellenas de pollo con salsa verde', 18),
+	(25, 1, 3, 'POZOLE', 'Sopa tradicional de maíz y carne', 20),
+	(28, 1, 3, 'CHILES EN NOGADA', 'Chiles rellenos con crema de nuez y granada', 25),
+	(29, 1, 3, 'MOLE POBLANO', 'Platillo de pollo con mole tradicional', 22),
+	(30, 1, 3, 'SOPES', 'Masa de maíz con frijoles, crema y queso', 12),
+	(31, 1, 3, 'QUESADILLAS', 'Tortillas rellenas de queso y hongos', 8),
+	(32, 1, 3, 'FLAUTAS', 'Tortillas rellenas de pollo y fritas', 14),
+	(33, 1, 3, 'TOSTADAS DE TINGA', 'Tostadas con pollo desmenuzado y salsa', 16),
+	(34, 1, 3, 'COCHINITA PIBIL', 'Cerdo marinado en achiote y jugo de naranja', 24),
+	(35, 1, 3, 'CHILAQUILES', 'Totopos bañados en salsa roja o verde', 13),
+	(36, 1, 3, 'CARNITAS', 'Carne de cerdo jugosa y crujiente', 20),
+	(37, 1, 3, 'GUACAMOLE', 'Crema de aguacate con limón y cilantro', 10),
+	(38, 1, 3, 'TAMAL DE ELOTE', 'Tamal dulce hecho de elote tierno', 7),
+	(39, 1, 1, 'MARGARITA', 'Cóctel de tequila, limón y sal en el borde del vaso', 18),
+	(40, 1, 1, 'MOJITO', 'Refrescante bebida de ron, menta y limón', 15),
+	(41, 1, 1, 'PIÑA TRADICIONAL', 'Bebida tropical de piña, coco y ron', 20),
+	(42, 1, 1, 'CAIPIRINHA', 'Cóctel brasileño de cachaza, limón y azúcar', 17),
+	(43, 1, 1, 'MICHELADA', 'Cerveza preparada con limón, sal y salsa picante', 12),
+	(44, 1, 1, 'TEQUILA SUNRISE', 'Cóctel de tequila, jugo de naranja y granadina', 16),
+	(45, 1, 1, 'DAIQUIRI', 'Bebida de ron, jugo de limón y azúcar', 14),
+	(46, 1, 1, 'CUBA LIBRE', 'Combinación de ron, refresco de cola y limón', 13),
+	(47, 1, 1, 'PALOMA', 'Bebida mexicana de tequila, refresco de toronja y limón', 15),
+	(48, 1, 1, 'CLERICOT', 'Vino tinto mezclado con frutas y un toque de licor', 18),
+	(49, 1, 1, 'NEGRONI', 'Cóctel clásico de ginebra, vermut y Campari', 22),
+	(50, 1, 1, 'BLOODY MARY', 'Bebida a base de vodka y jugo de tomate con especias', 19),
+	(51, 1, 1, 'MARTINI', 'Cóctel clásico de ginebra y vermut, adornado con aceituna', 25),
+	(52, 1, 1, 'SANGRÍA', 'Mezcla de vino tinto, frutas y un toque de brandy', 20),
+	(53, 1, 1, 'COSMOPOLITAN', 'Cóctel elegante de vodka, triple sec y jugo de arándano', 21),
+	(26, 1, 3, 'TACOS DE BARBACOA', 'Tacos de carne de barbacoa con salsa', 10),
+	(24, 1, 3, 'TAMALES', 'Tamales de maíz con pollo o cerdo', 15),
+	(71, 1, 1, 'PRODUCTO PRUEBA', 'CREACION DE PRODUCTO PARA REALIZAR PRUEBAS DE INSERCIÓN Y ACTUALIZACION', 33),
+	(75, 1, 1, 'Prueba desde celular', 'Buena prueba', 122),
+	(1, 1, 3, 'ENCHILADAS SUIZAS', 'Las enchiladas suizas son una variedad de las verdes, pero se diferencian porque su salsa es preparada con crema y son gratinadas con queso manchego.', 50),
+	(74, 1, 1, 'TAMALESPRUEBA', 'SA', 123),
+	(3, 1, 1, 'PALOMA', 'Cóctel mexicano refrescante y cítrico, a base de tequila, jugo de lima, refresco de toronja y soda', 60);
+/*!40000 ALTER TABLE "producto" ENABLE KEYS */;
 
-INSERT INTO "usuario" ("usu_id", "usu_tipo", "usu_est", "usu_aula", "nombre", "correo", "contrasena") VALUES
-	(1, 1, 1, 1, 'brayan', 'brayan@gmail.com', '$2a$10$Y6LDLHmHHIjzN6ubd/iEmu87UwXtCbjC239pEFg6gudZEFSGLdsCq'),
-	(8, 2, 1, 1, 'DIEGO ISMAEL ORTIZ', 'diego@umb.edomex.mx', '$2a$10$QsQDeyYF7eSd/sOrcjtBB.8BehADC1Llie2afgKvIqXa1kcAQ9vSm');
+-- Volcando datos para la tabla public.usuario: -1 rows
+/*!40000 ALTER TABLE "usuario" DISABLE KEYS */;
+INSERT INTO "usuario" ("usu_id", "usu_tipo", "usu_est", "nombre", "correo", "contrasena") VALUES
+	(1, 1, 1, 'brayan', 'brayan@gmail.com', '$2a$10$Y6LDLHmHHIjzN6ubd/iEmu87UwXtCbjC239pEFg6gudZEFSGLdsCq'),
+	(8, 2, 1, 'DIEGO ISMAEL ORTIZ', 'diego@umb.edomex.mx', '$2a$10$QsQDeyYF7eSd/sOrcjtBB.8BehADC1Llie2afgKvIqXa1kcAQ9vSm');
+/*!40000 ALTER TABLE "usuario" ENABLE KEYS */;
 
-INSERT INTO "pedido" ("ped_id", "usu_id", "ped_est", "fecha", "total", "descripcion", "emp_id", "fecha_concluido") VALUES
-	(1, 8, 3, '2025-01-03 04:13:42.128', 434, 'Muy buena comida', 1, '2025-01-03 04:15:34.207');
+-- Volcando datos para la tabla public._pgmdd_backup_cat_est_prod_2025-09-01_02:31: -1 rows
+/*!40000 ALTER TABLE "_pgmdd_backup_cat_est_prod_2025-09-01_02:31" DISABLE KEYS */;
+/*!40000 ALTER TABLE "_pgmdd_backup_cat_est_prod_2025-09-01_02:31" ENABLE KEYS */;
 
+-- Volcando datos para la tabla public._pgmdd_backup_cat_tipo_prod_2025-09-01_02:31: -1 rows
+/*!40000 ALTER TABLE "_pgmdd_backup_cat_tipo_prod_2025-09-01_02:31" DISABLE KEYS */;
+/*!40000 ALTER TABLE "_pgmdd_backup_cat_tipo_prod_2025-09-01_02:31" ENABLE KEYS */;
 
-INSERT INTO "detalle_pedido" ("det_id", "ped_id", "producto", "cantidad", "descripcion", "total", "imagen") VALUES
-	(1, 1, 'Chilaquiles Verdes', 2, 'Milanesa,Cebolla,Cilantro,Huevo,Frijoles', 260, '/assets/img/Productos/Alimentos/Chilaquiles.jpg'),
-	(2, 1, 'Burritos', 1, 'Bistec,Pastor,Tocino,Queso', 174, '/assets/img/Productos/Alimentos/Burritos.jpg');
+-- Volcando datos para la tabla public._pgmdd_backup_producto_2025-09-01_02:35: -1 rows
+/*!40000 ALTER TABLE "_pgmdd_backup_producto_2025-09-01_02:35" DISABLE KEYS */;
+INSERT INTO "_pgmdd_backup_producto_2025-09-01_02:35" ("id_prod", "prod_est", "prod_tipo", "nombre", "descripcion", "precio") VALUES
+	(1, 1, 3, 'ENCHILADAS SUIZAS', 'DELICIOSAS', 50);
+/*!40000 ALTER TABLE "_pgmdd_backup_producto_2025-09-01_02:35" ENABLE KEYS */;
 
-
-INSERT INTO "producto" ("prod_id", "prod_tipo", "prod_estatus", "producto", "ingredientes", "descripcion", "precio", "imagen") VALUES
-	(1, 1, 1, 'Boneles', 'Jicama,Pepino,Zanahoria', '530g (8 a 10pzas)', 257, '/assets/img/Productos/Alimentos/Boneles.jpg'),
-	(2, 1, 1, 'Burritos', 'Bistec,Pastor,Tocino,Queso', '', 174, '/assets/img/Productos/Alimentos/Burritos.jpg'),
-	(3, 1, 1, 'Chilaquiles Verdes', 'Milanesa,Cebolla,Cilantro,Huevo,Frijoles', '', 130, '/assets/img/Productos/Alimentos/Chilaquiles.jpg'),
-	(4, 1, 1, 'COSTILLAS BBQ', 'ADEREZO BÁSICO,HONEY MUSTARD,RANCH', 'Costillas de Cerdo al Horno', 130, '/assets/img/Productos/Alimentos/Costillas.jpg'),
-	(5, 1, 1, 'HAMBURGUESA DOBLE', 'Lechuga,Queso,Jitomate,Cebolla,Mayonesa,Mostasa,Catchup ', 'Hamburguesa con doble carne', 100, '/assets/img/Productos/Alimentos/HamburguesaDoble.jpg'),
-	(6, 1, 1, 'HAMBURGUESA SENCILLA', 'Lechuga,Queso,Jitomate,Cebolla,Mayonesa,Mostasa,Catchup', 'Hamburguesa Secilla de una carne.', 80, '/assets/img/Productos/Alimentos/HamburguesaSencilla.jpg'),
-	(7, 1, 1, 'PAPAS FRITAS', 'QUESO,CATHCHUP,CREAM', 'Nuestras patatas fritas de corte natural con piel y sal de mar, bañadas con salsa de queso cremosa y tibia, queso cheddar rallado y crujiente tocino ahumado', 50, '/assets/img/Productos/Alimentos/PapasFrancesa.png'),
-	(8, 1, 1, 'QUESABIRRIA', 'LIMON,CEBOLLA,CILANTRO', 'Quesadilla de harina rellena de deliciosa birria. Acompañada de su consomé.', 70, '/assets/img/Productos/Alimentos/QuesaBirrias.jpg'),
-	(9, 1, 1, 'QUESADILLAS', 'LIMON,CEBOLLA,CILANTRO', 'Quesadilla Frita de Tinga de Pollo', 30, '/assets/img/Productos/Alimentos/Quesadillas.jpg'),
-	(10, 1, 1, 'SOPES DE POLLO', 'CHILE MANZANO,CEBOLLA,AGUACATE,CREMA,NOPAL', 'Sope Tradicional ', 60, '/assets/img/Productos/Alimentos/Sopes.jpg'),
-	(17, 3, 1, 'SPORTS PACK', '', '15 BONELESS, PAPAS FRITAS Y MOZZARELLA', 130, '/assets/img/Productos/Promociones/PBoneles.jpg'),
-	(18, 3, 1, 'BONELESS 2x1', '', 'COMPRA UNA Y LLEVATE DOS', 140, '/assets/img/Productos/Promociones/PBoneles2.png'),
-	(19, 3, 1, 'HAMBURESA', '', 'UNA HAMBURGUESA, UN JUGO DEL VALLE Y UNAS PAPAS FRITAS', 180, '/assets/img/Productos/Promociones/PHamburgesasPapasJugos.jpg'),
-	(20, 3, 1, 'QUESADILLAS Y SOPES', '', 'COMPRA 2 Y LLEVATE 3 SOPES O QUESADILLAS', 130, '/assets/img/Productos/Promociones/PQusadillasYSopes.jpg'),
-	(15, 2, 1, 'PEPSI', '', 'Bebida PEPSI 680 ml', 30, '/assets/img/Productos/Bebidas/Pepsi.jpg'),
-	(16, 2, 1, 'SPRITE', '', 'Bebida SPRITE 680 m', 30, '/assets/img/Productos/Bebidas/Sprite.jpg'),
-	(13, 2, 1, 'FANTA', '', 'Bebida FANTA 680 ml', 30, '/assets/img/Productos/Bebidas/Fanta.jpg'),
-	(14, 2, 1, 'JUGO DEL VALLE DURAZNO', '', 'Bebida JUGO DEL VALLE DURAZNO 680 ml', 30, '/assets/img/Productos/Bebidas/JugoDelValle.jpg'),
-	(11, 2, 1, 'ARIZONA SANDIA', '', 'Bebida Arizona sandía 680 ml', 30, '/assets/img/Productos/Bebidas/Arizona.jpg'),
-	(12, 2, 1, 'COCA-COLA', '-', 'Bebida COCA-COLA 680 ml', 30, '/assets/img/Productos/Bebidas/CocaCola.png');
-
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

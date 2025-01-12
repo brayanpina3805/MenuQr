@@ -9,7 +9,6 @@ html {
     flex-direction: column;
     overflow-x: hidden;
     background-color: white;
-    /* Establecer el fondo del body como blanco */
 }
 
 /* Header y Footer */
@@ -22,15 +21,13 @@ html {
     background-color: #ff8c00;
 }
 
-/* Menú de categorías (Bebidas | Comida) */
+/* Menú de categorías */
 .category-menu {
     display: flex;
     justify-content: flex-end;
-    /* Alineado a la derecha */
     gap: 20px;
     padding: 10px 20px;
     background-color: transparent;
-    /* Eliminar fondo */
 }
 
 .category-menu a {
@@ -50,32 +47,28 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     background: white;
 }
 
 .menu {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    /* Espacio entre productos */
-    padding: 40px;
+    gap: 20px;
+    padding: 20px;
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
-    box-shadow: none;
-    /* Sin sombra */
     overflow-x: auto;
-    /* Permite desplazamiento horizontal */
 }
 
 /* Título del menú */
 .menu-title {
     width: 100%;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .menu-title h2 {
@@ -85,79 +78,115 @@ html {
 
 /* Estilo de los productos */
 .menu-item {
-    flex: 1 1 calc(25% - 40px);
-    /* 4 productos por fila con margen */
-    padding: 30px;
-    /* Padding para los productos */
+    flex: 1 1 calc(25% - 20px); /* 4 por fila en pantallas grandes */
+    padding: 15px;
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.2s ease-in-out, background-color ff8c00;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
     background: none;
     box-sizing: border-box;
-    overflow: hidden;
+    height: auto;
+    max-height: 300px; /* Altura máxima para mantener uniformidad */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
 }
 
+.menu-item::-webkit-scrollbar {
+    width: 8px;
+}
+
+.menu-item::-webkit-scrollbar-thumb {
+    background: #ff8c00;
+    border-radius: 10px;
+}
+
+.menu-item::-webkit-scrollbar-thumb:hover {
+    background: #ff6500;
+}
+
+/* Imagen */
+.menu-item img {
+    max-width: 120px;
+    height: auto;
+    margin: 0 auto 10px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Texto dentro del producto */
 .menu-item h3 {
     margin: 10px 0 5px;
     color: #ff8c00;
-}
-
-.menu-item img {
-    width: 100%;
-    /* Imagen ajustable */
-    max-width: 150px;
-    /* Limite máximo de ancho de la imagen */
-    height: auto;
-    /* La altura se ajusta automáticamente */
-    object-fit: cover;
-    /* Asegura que la imagen no se deforme */
-    border-radius: 10px;
-    margin: 10px 0;
+    font-size: 18px;
 }
 
 .menu-item p {
     margin: 5px 0;
     color: black;
+    font-size: 14px;
 }
 
 .menu-item .price {
     font-weight: bold;
     color: black;
+    margin-top: auto;
 }
 
+/* Hover */
 .menu-item:hover {
     transform: scale(1.05);
     background-color: #f4f4f4;
 }
 
-/* Responsividad para pantallas grandes */
+/* Ajustes para pantallas grandes */
 @media (min-width: 1025px) {
     .menu-item {
-        flex: 1 1 calc(25% - 40px);
-        /* 4 productos por fila en pantallas grandes */
+        flex: 1 1 calc(25% - 20px);
     }
 }
 
-/* Responsividad para pantallas medianas */
+/* Ajustes para pantallas medianas */
 @media (max-width: 1024px) {
     .menu-item {
-        flex: 1 1 calc(33.33% - 40px);
-        /* 3 productos por fila en pantallas medianas */
+        flex: 1 1 calc(33.33% - 15px);
     }
 }
 
-/* Responsividad para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
     .menu-item {
-        flex: 1 1 calc(50% - 40px);
-        /* 2 productos por fila en pantallas pequeñas */
+        flex: 1 1 calc(50% - 15px);
     }
 }
 
-/* Responsividad para pantallas muy pequeñas */
+/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .menu-item {
-        flex: 1 1 100%;
-        /* 1 producto por fila en pantallas muy pequeñas */
+        flex: 1 1 calc(50% - 10px); /* Dos columnas en móviles */
+        max-height: 250px; /* Altura más compacta */
+        padding: 10px;
+    }
+
+    .menu-container {
+        padding: 10px;
+    }
+
+    .menu {
+        gap: 10px; /* Reduce espacio entre tarjetas */
+        padding: 10px;
+    }
+
+    .menu-item img {
+        max-width: 80px; /* Imagen más pequeña */
+    }
+
+    .menu-item h3 {
+        font-size: 16px;
+    }
+
+    .menu-item p {
+        font-size: 12px;
     }
 }

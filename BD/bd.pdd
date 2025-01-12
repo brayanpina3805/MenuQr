@@ -2,7 +2,7 @@
 
 <DBMODEL Version="1.92" TYPE="PostgreSQL">
 
-<MODELSETTINGS MDDVERSION="1.16.0 (build 1173)" ModelProject="" ModelName="bd" ModelCompany="" ModelAuthor="" ModelCopyright="" ModelVersion="" ModelVersionAI="0" ModelSaveScriptsWithVersion="0" ModelCreated="2025-01-07 05:43:47" ModelUpdated="2025-01-07 05:43:47" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object GenSettings1: TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  NotValidConstraints = False\n  ConcurrentlyIndexes = False\n  ISQL = False\n  ExecuteAfterGeneration = True\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger, tblgoCreateCHECK, tblgoFieldDefault]\n  OwnerOptions = [owngoSchema, owngoTable, owngoView, owngoSP, owngoSequence, owngoUDT]\n  ACLOptions = [aclgoSchema, aclgoTable, aclgoView, aclgoSP, aclgoSequence]\n  ModifyOptions = [mgoKeepTbls, mgoBackupTbls, mgoTraceRenaming]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" DisplaySettings="object DisplaySettings1: TDisplaySettings\n  ObjectsDisplay = [edoColumns, edoInhColumns, edoIndices, edoConstraints, edoTriggers, edoRules, edoColTypes, edoFKs, rdoRefName, spdoParameters, spdoResult, spdoParamTypes, spdoParamKind, vdoAttributes, vdoTargets, vdoRules]\n  Color = clWhite\n  ShowIcons = True\n  SnapGrid = True\n  DisplaySnap = True\n  SnapSize = 10\n  ShowPages = True\n  EntityFillColor = clWhite\n  EntityLineColor = clNavy\n  EntityFontColor = clBlack\n  SPFillColor = clCream\n  SPLineColor = clNavy\n  SPFontColor = clBlack\n  ViewFillColor = clMoneyGreen\n  ViewLineColor = clNavy\n  ViewFontColor = clBlack\n  RefNotation = 0\n  RefColor = clNavy\n  RefLabelColor = clWhite\n  RefLabelFontColor = clBlack\n  MinimapShapesStyle = mmssFillAndBorder\n  MinimapVisibleAreaStyle = mmvasBitmapShading\n  MinimapBackColor = clWhite\nend\n" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" NamePatterns="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" PKColumnsFirst="0" HPageCount="5" VPageCount="5" />
+<MODELSETTINGS MDDVERSION="1.16.0 (build 1173)" ModelProject="" ModelName="bd" ModelCompany="" ModelAuthor="" ModelCopyright="" ModelVersion="" ModelVersionAI="0" ModelSaveScriptsWithVersion="0" ModelCreated="2025-01-12 16:45:42" ModelUpdated="2025-01-12 16:45:42" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object GenSettings1: TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  NotValidConstraints = False\n  ConcurrentlyIndexes = False\n  ISQL = False\n  ExecuteAfterGeneration = True\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger, tblgoCreateCHECK, tblgoFieldDefault]\n  OwnerOptions = [owngoSchema, owngoTable, owngoView, owngoSP, owngoSequence, owngoUDT]\n  ACLOptions = [aclgoSchema, aclgoTable, aclgoView, aclgoSP, aclgoSequence]\n  ModifyOptions = [mgoKeepTbls, mgoBackupTbls, mgoTraceRenaming]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" DisplaySettings="object DisplaySettings1: TDisplaySettings\n  ObjectsDisplay = [edoColumns, edoInhColumns, edoIndices, edoConstraints, edoTriggers, edoRules, edoColTypes, edoFKs, rdoRefName, spdoParameters, spdoResult, spdoParamTypes, spdoParamKind, vdoAttributes, vdoTargets, vdoRules]\n  Color = clWhite\n  ShowIcons = True\n  SnapGrid = True\n  DisplaySnap = True\n  SnapSize = 10\n  ShowPages = True\n  EntityFillColor = clWhite\n  EntityLineColor = clNavy\n  EntityFontColor = clBlack\n  SPFillColor = clCream\n  SPLineColor = clNavy\n  SPFontColor = clBlack\n  ViewFillColor = clMoneyGreen\n  ViewLineColor = clNavy\n  ViewFontColor = clBlack\n  RefNotation = 0\n  RefColor = clNavy\n  RefLabelColor = clWhite\n  RefLabelFontColor = clBlack\n  MinimapShapesStyle = mmssFillAndBorder\n  MinimapVisibleAreaStyle = mmvasBitmapShading\n  MinimapBackColor = clWhite\nend\n" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" NamePatterns="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" PKColumnsFirst="0" HPageCount="5" VPageCount="5" />
 
 <DATABASE Name="Database_1" CharacterSet="" Collate="" CType="" Tablespace="" Owner="" Template="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
 
@@ -35,15 +35,27 @@
 </DOMAINS>
 
 <COMPOSITES>
-<COMPOSITE ID="10020" Name="cat_estatus_usu" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17000">
+<COMPOSITE ID="10000" Name="cat_est_prod" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17116">
 	<COLUMNS>
 	</COLUMNS>
 </COMPOSITE>
-<COMPOSITE ID="10021" Name="cat_tipo_usu" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17014">
+<COMPOSITE ID="10001" Name="cat_estatus_usu" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17000">
 	<COLUMNS>
 	</COLUMNS>
 </COMPOSITE>
-<COMPOSITE ID="10022" Name="usuario" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17056">
+<COMPOSITE ID="10002" Name="cat_tipo_prod" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17121">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="10003" Name="cat_tipo_usu" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17014">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="10004" Name="producto" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17127">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="10005" Name="usuario" SchemaName="public" OwnerName="" Comments="" MasterTableOID="17056">
 	<COLUMNS>
 	</COLUMNS>
 </COMPOSITE>
@@ -60,17 +72,40 @@
 
 <METADATA>
 <ENTITIES>
-<ENTITY ID="17000" Name="cat_estatus_usu" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="470" YPos="70" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+<ENTITY ID="17116" Name="cat_est_prod" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="5" YPos="5" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
 	<COLUMNS>
-		<COLUMN ID="80" Name="cat_est_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="81" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="1" Name="cat_est_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="2" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="50" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<REFERENCES_BEGIN>
+		<REFERENCE_BEGIN ID="17133" />
+	</REFERENCES_BEGIN>
+	<CONSTRAINTS>
+		<CONSTRAINT ID="17120" Name="cat_est_prod_pkey" Kind="2" Expression="" ReferenceIndex="17119" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
+			<CONSTRAINTCOLUMNS COMMATEXT="1"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="17119" Name="cat_est_prod_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="17120" StorageParams="" Comments="">
+			<INDEXCOLUMNS COMMATEXT="cat_est_id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
+			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
+		</INDEX>
+	</INDEXES>
+</ENTITY>
+
+<ENTITY ID="17000" Name="cat_estatus_usu" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="730" YPos="60" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+	<COLUMNS>
+		<COLUMN ID="3" Name="cat_est_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="4" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 	</COLUMNS>
 	<REFERENCES_BEGIN>
 		<REFERENCE_BEGIN ID="17102" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
 		<CONSTRAINT ID="17005" Name="cat_estatus_usu_pkey" Kind="2" Expression="" ReferenceIndex="17004" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
-			<CONSTRAINTCOLUMNS COMMATEXT="80"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTCOLUMNS COMMATEXT="3"></CONSTRAINTCOLUMNS>
 			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
@@ -83,17 +118,40 @@
 	</INDEXES>
 </ENTITY>
 
-<ENTITY ID="17014" Name="cat_tipo_usu" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="180" YPos="270" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+<ENTITY ID="17121" Name="cat_tipo_prod" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="446" YPos="5" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
 	<COLUMNS>
-		<COLUMN ID="82" Name="cat_usu_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="83" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="5" Name="cat_tipo_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="6" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="50" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<REFERENCES_BEGIN>
+		<REFERENCE_BEGIN ID="17138" />
+	</REFERENCES_BEGIN>
+	<CONSTRAINTS>
+		<CONSTRAINT ID="17125" Name="cat_tipo_prod_pkey" Kind="2" Expression="" ReferenceIndex="17124" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
+			<CONSTRAINTCOLUMNS COMMATEXT="5"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="17124" Name="cat_tipo_prod_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="17125" StorageParams="" Comments="">
+			<INDEXCOLUMNS COMMATEXT="cat_tipo_id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
+			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
+		</INDEX>
+	</INDEXES>
+</ENTITY>
+
+<ENTITY ID="17014" Name="cat_tipo_usu" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="620" YPos="300" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+	<COLUMNS>
+		<COLUMN ID="7" Name="cat_usu_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="8" Name="descripcion" Pos="2" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 	</COLUMNS>
 	<REFERENCES_BEGIN>
 		<REFERENCE_BEGIN ID="17107" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
 		<CONSTRAINT ID="17019" Name="cat_tipo_usu_pkey" Kind="2" Expression="" ReferenceIndex="17018" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
-			<CONSTRAINTCOLUMNS COMMATEXT="82"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTCOLUMNS COMMATEXT="7"></CONSTRAINTCOLUMNS>
 			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
@@ -106,14 +164,42 @@
 	</INDEXES>
 </ENTITY>
 
-<ENTITY ID="17056" Name="usuario" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="470" YPos="240" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+<ENTITY ID="17127" Name="producto" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="400" YPos="370" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
 	<COLUMNS>
-		<COLUMN ID="84" Name="usu_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="85" Name="usu_tipo" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="86" Name="usu_est" Pos="3" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="87" Name="nombre" Pos="4" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="88" Name="correo" Pos="5" Datatype="1043" Type="varchar" Width="60" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
-		<COLUMN ID="89" Name="contrasena" Pos="6" Datatype="1043" Type="varchar" Width="255" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="9" Name="id_prod" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="10" Name="prod_est" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="11" Name="prod_tipo" Pos="3" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="12" Name="nombre" Pos="4" Datatype="1043" Type="varchar" Width="50" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="13" Name="descripcion" Pos="5" Datatype="1043" Type="varchar" Width="255" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="14" Name="precio" Pos="6" Datatype="700" Type="float4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<REFERENCES_END>
+		<REFERENCE_END ID="17133" />
+		<REFERENCE_END ID="17138" />
+	</REFERENCES_END>
+	<CONSTRAINTS>
+		<CONSTRAINT ID="17132" Name="Producto_pkey" Kind="2" Expression="" ReferenceIndex="17131" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
+			<CONSTRAINTCOLUMNS COMMATEXT="9"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="17131" Name="Producto_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="17132" StorageParams="" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id_prod"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
+			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
+		</INDEX>
+	</INDEXES>
+</ENTITY>
+
+<ENTITY ID="17056" Name="usuario" SchemaOID="0" SchemaName="public" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="990" YPos="150" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="" >
+	<COLUMNS>
+		<COLUMN ID="15" Name="usu_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="16" Name="usu_tipo" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="17" Name="usu_est" Pos="3" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="18" Name="nombre" Pos="4" Datatype="1043" Type="varchar" Width="100" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="19" Name="correo" Pos="5" Datatype="1043" Type="varchar" Width="60" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="20" Name="contrasena" Pos="6" Datatype="1043" Type="varchar" Width="255" Prec="0" NotNull="0" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 	</COLUMNS>
 	<REFERENCES_END>
 		<REFERENCE_END ID="17102" />
@@ -121,7 +207,7 @@
 	</REFERENCES_END>
 	<CONSTRAINTS>
 		<CONSTRAINT ID="17061" Name="usuario_pkey" Kind="2" Expression="" ReferenceIndex="17060" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
-			<CONSTRAINTCOLUMNS COMMATEXT="84"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTCOLUMNS COMMATEXT="15"></CONSTRAINTCOLUMNS>
 			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
@@ -137,11 +223,19 @@
 </ENTITIES>
 
 <REFERENCES>
-<REFERENCE ID="17102" Name="Ref_usuario_to_cat_est_usu" SOURCE="17000" DESTINATION="17056" FKIDS="80=86\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17005" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
+<REFERENCE ID="17133" Name="Ref_Producto_to_cat_est_prod" SOURCE="17116" DESTINATION="17127" FKIDS="1=10\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17120" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
 	<USERPOINTS>
 	</USERPOINTS>
 </REFERENCE>
-<REFERENCE ID="17107" Name="Ref_usuario_to_cat_tipo_usu" SOURCE="17014" DESTINATION="17056" FKIDS="82=85\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17019" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
+<REFERENCE ID="17138" Name="Ref_Producto_to_cat_tipo_prod" SOURCE="17121" DESTINATION="17127" FKIDS="5=11\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17125" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
+	<USERPOINTS>
+	</USERPOINTS>
+</REFERENCE>
+<REFERENCE ID="17102" Name="Ref_usuario_to_cat_est_usu" SOURCE="17000" DESTINATION="17056" FKIDS="3=17\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17005" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
+	<USERPOINTS>
+	</USERPOINTS>
+</REFERENCE>
+<REFERENCE ID="17107" Name="Ref_usuario_to_cat_tipo_usu" SOURCE="17014" DESTINATION="17056" FKIDS="7=16\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="17019" LabelPointNumber="2" LabelPosition="0.5" ManualStartTailPosition="0" ManualEndTailPosition="0" />
 	<USERPOINTS>
 	</USERPOINTS>
 </REFERENCE>

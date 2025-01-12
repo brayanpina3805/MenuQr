@@ -1,6 +1,9 @@
 package com.umb.cafeteria.Contollers;
 
-import com.umb.cafeteria.Entity.*;
+import com.umb.cafeteria.Entity.Usuario;
+import com.umb.cafeteria.Entity.Producto;
+import com.umb.cafeteria.Entity.CatTipoProd;
+import com.umb.cafeteria.Entity.CatEstatusProd;
 import com.umb.cafeteria.Service.ICatEstatusProdService;
 import com.umb.cafeteria.Service.ICatTipoProdService;
 import com.umb.cafeteria.Service.IProductoService;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
