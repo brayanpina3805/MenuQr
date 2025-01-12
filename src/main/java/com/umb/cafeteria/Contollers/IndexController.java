@@ -128,17 +128,19 @@ public class IndexController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/private/eliminarProducto/{id}")
-    public ResponseEntity<Map<String, String>> eliminarProducto(@PathVariable("id") int id) {
-        Map<String, String> response = new HashMap<>();
+    @GetMapping("/eliminarProducto")
+    public String eliminarUser(@RequestParam("prodId") String prodId, RedirectAttributes redirectAttributes) {
         try {
-            productoService.eliminarProd(id); // Lógica para eliminar el producto
-            response.put("mensaje", "Producto eliminado correctamente");
-            return ResponseEntity.ok(response);
+
+            Producto prod = productoService.findByIdProd(Integer.parseInt(prodId));
+            prod.setProsEst(new CatEstatusProd(6));
+            productoService.actualizar(prod);
+            redirectAttributes.addFlashAttribute("alertaExito", "El Producto con clave " + prodId + " a cambiado su estatus a Eliminado!");
         } catch (Exception e) {
-            response.put("mensaje", "Error al eliminar el producto: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            redirectAttributes.addFlashAttribute("alerta", "Algo salio mal!");
+            e.printStackTrace();
         }
+        return "redirect:/private/index";
     }
 
 }

@@ -6,6 +6,7 @@ package com.umb.cafeteria.Impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.umb.cafeteria.Dao.IProductoDao;
+import com.umb.cafeteria.Entity.CatEstatusProd;
 import com.umb.cafeteria.Entity.CatTipoProd;
 import com.umb.cafeteria.Entity.Producto;
 import com.umb.cafeteria.Service.IProductoService;
@@ -56,6 +57,11 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     public Producto findByIdProd(int id) {
         return productoDao.findByIdProd(id);
+    }
+
+    @Override
+    public List<Producto> findByProdTipoAndProsEst(CatTipoProd id, CatEstatusProd idE) {
+        return productoDao.findByProdTipoAndProsEst(id, idE);
     }
 
 }

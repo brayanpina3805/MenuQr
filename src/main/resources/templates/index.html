@@ -21,7 +21,17 @@
         </div>
 
         <div class="admin-menu-container">
+
+
             <div class="admin-menu">
+                <div th:if="${alerta}" class="alert alert-danger" role="alert">
+                    <span th:text="${alerta}"></span>
+                </div>
+
+                <!-- Para alerta de éxito -->
+                <div th:if="${alertaExito}" class="alert alert-success" role="alert">
+                    <span th:text="${alertaExito}"></span>
+                </div>
                 <h2>
                     Elementos del Menú
                     <button class="add-button" onclick="openAddModal()">Agregar</button>
@@ -43,16 +53,21 @@
                 <!-- Sección Todos -->
                 <div class="category" id="todos">
                     <div class="menu-item" th:each="pP : ${productosGenerales}">
-                        <span th:text="${pP.getNombre()}"> </span>
+                        <span 
+                            th:text="${pP.getIdProd()} + ' | ' + ${pP.getNombre()} + ' | ' + ${pP.getProsEst().getDescripcion()}"
+                            style="font-family: 'Arial', sans-serif; font-size: 16px; color: #555;">
+                        </span>
+
                         <div class="button-container">
                             <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
-                            <button class="delete-button"
-                                    th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
-                                    >
+                            <a 
+                                class="delete-button" 
+                                th:href="@{/private/eliminarProducto(prodId=${pP.getIdProd()})}" 
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar al usuario con ID ' + ${pP.getIdProd()} + '?');">
                                 Eliminar
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -62,17 +77,20 @@
                 <!-- Sección Bebidas -->
                 <div class="category" id="bebidas">
                     <div class="menu-item"  th:each="pP : ${prodBebidas}">
-                        <span th:text="${pP.getNombre()}"> </span>
+                        <span 
+                            th:text="${pP.getIdProd()} + ' | ' + ${pP.getNombre()} + ' | ' + ${pP.getProsEst().getDescripcion()}"
+                            style="font-family: 'Arial', sans-serif; font-size: 16px; color: #555;">
+                        </span>
                         <div class="button-container">
                             <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
-                            <button
-                                class="delete-button"
-                                th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
-                                >
+                            <a 
+                                class="delete-button" 
+                                th:href="@{/private/eliminarProducto(prodId=${pP.getIdProd()})}" 
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar al usuario con ID ' + ${pP.getIdProd()} + '?');">
                                 Eliminar
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -80,17 +98,20 @@
                 <!-- Sección Comida -->
                 <div class="category" id="comida">
                     <div class="menu-item"  th:each="pP : ${prodComida}">
-                        <span th:text="${pP.getNombre()}"> </span>
+                        <span 
+                            th:text="${pP.getIdProd()} + ' | ' + ${pP.getNombre()} + ' | ' + ${pP.getProsEst().getDescripcion()}"
+                            style="font-family: 'Arial', sans-serif; font-size: 16px; color: #555;">
+                        </span>
                         <div class="button-container">
                             <button class="edit-button" th:onclick="'openEditModal(' + ${pP.getIdProd()} + ')'">
                                 Editar
                             </button>
-                            <button
-                                class="delete-button"
-                                th:onclick="'confirmDelete(' + ${pP.getIdProd()} + ')'"
-                                >
+                            <a 
+                                class="delete-button" 
+                                th:href="@{/private/eliminarProducto(prodId=${pP.getIdProd()})}" 
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar al usuario con ID ' + ${pP.getIdProd()} + '?');">
                                 Eliminar
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -189,112 +210,104 @@
 
             //eliminarSeleccion
             function confirmDelete(productId) {
-                // Hacer una solicitud para obtener los detalles del producto a editar
-                const confirmar = confirm("¿Estás seguro de que deseas eliminar este producto?");
-                if (confirmar) {
-                    // Enviar solicitud de eliminación al servidor
-                    fetch('/private/eliminarProducto/' + productId, {
-                        method: 'DELETE',
+            // Hacer una solicitud para obtener los detalles del producto a editar
+            const confirmar = confirm("¿Estás seguro de que deseas eliminar este producto?");
+            if (confirmar) {
+            // Enviar solicitud de eliminación al servidor
+            fetch('/private/eliminarProducto/' + productId, {
+            method: 'DELETE',
+            })
+                    .then(response => response.json())
+                    .then(data => {
+                    if (data.mensaje === 'Producto eliminado correctamente') {
+                    // Mostrar alerta de éxito
+                    mostrarAlerta('Producto eliminado correctamente', 'success');
+                    // Recargar la página o actualizar la lista
+                    setTimeout(() => {
+                    location.reload(); // Recargar la página
+                    }, 1000);
+                    } else {
+                    // Mostrar alerta de error
+                    mostrarAlerta('Error al eliminar el producto', 'danger');
+                    }
                     })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.mensaje === 'Producto eliminado correctamente') {
-                                    // Mostrar alerta de éxito
-                                    mostrarAlerta('Producto eliminado correctamente', 'success');
-                                    // Recargar la página o actualizar la lista
-                                    setTimeout(() => {
-                                        location.reload(); // Recargar la página
-                                    }, 1000);
-                                } else {
-                                    // Mostrar alerta de error
-                                    mostrarAlerta('Error al eliminar el producto', 'danger');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error al eliminar el producto:', error);
-                                mostrarAlerta('Error al procesar la solicitud', 'danger');
-                            });
-                }
+                    .catch(error => {
+                    console.error('Error al eliminar el producto:', error);
+                    mostrarAlerta('Error al procesar la solicitud', 'danger');
+                    });
+            }
             }
 
 
 
             //editar modal
             function openEditModal(productId) {
-                // Hacer una solicitud para obtener los detalles del producto a editar
-                fetch('/private/obtenerProducto/' + productId)
-                        .then(response => response.json())
-                        .then(producto => {
-                            console.log(producto);
-
-                            document.getElementById('edit-product-id').value = productId;
-                            document.getElementById('edit-product-name').value = producto.nombre;
-                            document.getElementById('edit-product-description').value = producto.descripcion;
-                            document.getElementById('edit-product-price').value = producto.precio;
-                            document.getElementById('edit-product-type').value = producto.prodTipo.catTipoProd;  // Asegúrate de usar prodTipo.catTipoProd
-                            document.getElementById('edit-product-status').value = producto.prosEst.catEstId;
-                            // Mostrar el modal de edición
-                            document.getElementById('editModal').style.display = "block";
-                        })
-                        .catch(error => {
-                            console.error('Error al obtener el producto:', error);
-                            mostrarAlerta('No se pudo cargar el producto para editar', 'danger');
-                        });
-
-
+            // Hacer una solicitud para obtener los detalles del producto a editar
+            fetch('/private/obtenerProducto/' + productId)
+                    .then(response => response.json())
+                    .then(producto => {
+                    console.log(producto);
+                    document.getElementById('edit-product-id').value = productId;
+                    document.getElementById('edit-product-name').value = producto.nombre;
+                    document.getElementById('edit-product-description').value = producto.descripcion;
+                    document.getElementById('edit-product-price').value = producto.precio;
+                    document.getElementById('edit-product-type').value = producto.prodTipo.catTipoProd; // Asegúrate de usar prodTipo.catTipoProd
+                    document.getElementById('edit-product-status').value = producto.prosEst.catEstId;
+                    // Mostrar el modal de edición
+                    document.getElementById('editModal').style.display = "block";
+                    })
+                    .catch(error => {
+                    console.error('Error al obtener el producto:', error);
+                    mostrarAlerta('No se pudo cargar el producto para editar', 'danger');
+                    });
             }
 
             // Manejar el envío del formulario
             document.getElementById('editarProducto').addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                const data = {
-                    idProd: document.getElementById('edit-product-id').value,
+            event.preventDefault();
+            const data = {
+            idProd: document.getElementById('edit-product-id').value,
                     nombre: document.getElementById('edit-product-name').value,
                     descripcion: document.getElementById('edit-product-description').value,
                     precio: document.getElementById('edit-product-price').value,
                     tipoId: document.getElementById('edit-product-type').value,
                     estadoId: document.getElementById('edit-product-status').value
-                };
-
-                fetch('/private/actualizarProducto', {
-                    method: 'POST',
+            };
+            fetch('/private/actualizarProducto', {
+            method: 'POST',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     body: new URLSearchParams(data)
-                })
-                        .then(response => response.json())
-                        .then(responseData => {
-                            if (responseData.mensaje === 'Producto actualizado correctamente') {
-                                mostrarAlertaEdit('Producto actualizado correctamente', 'success');
-                            } else {
-                                mostrarAlertaEdit(responseData.mensaje, 'danger');
-                            }
-                        })
-                        .catch(error => {
-                            mostrarAlertaEdit('Error al actualizar el producto', 'danger');
-                        });
+            })
+                    .then(response => response.json())
+                    .then(responseData => {
+                    if (responseData.mensaje === 'Producto actualizado correctamente') {
+                    mostrarAlertaEdit('Producto actualizado correctamente', 'success');
+                    } else {
+                    mostrarAlertaEdit(responseData.mensaje, 'danger');
+                    }
+                    })
+                    .catch(error => {
+                    mostrarAlertaEdit('Error al actualizar el producto', 'danger');
+                    });
             });
-
 // Mostrar alerta en el modal de edición
             function mostrarAlertaEdit(mensaje, tipo) {
-                const alertaDiv = document.createElement("div");
-                alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
-                alertaDiv.textContent = mensaje;
-
-                const alertContainer = document.getElementById("alert-container-edit");
-                alertContainer.innerHTML = ''; // Limpiar alertas previas
-                alertContainer.appendChild(alertaDiv);
-
-                // Temporizador para eliminar la alerta después de 2 segundos
-                setTimeout(() => {
-                    alertaDiv.remove();
-                    if (tipo === 'success') {
-                        // Recargar la página después de que la alerta desaparezca si es éxito
-                        setTimeout(() => {
-                            location.reload(); // Recargar página
-                        }, 1000); // Añadir un pequeño retraso antes de recargar
-                    }
-                }, 2000);
+            const alertaDiv = document.createElement("div");
+            alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
+            alertaDiv.textContent = mensaje;
+            const alertContainer = document.getElementById("alert-container-edit");
+            alertContainer.innerHTML = ''; // Limpiar alertas previas
+            alertContainer.appendChild(alertaDiv);
+            // Temporizador para eliminar la alerta después de 2 segundos
+            setTimeout(() => {
+            alertaDiv.remove();
+            if (tipo === 'success') {
+            // Recargar la página después de que la alerta desaparezca si es éxito
+            setTimeout(() => {
+            location.reload(); // Recargar página
+            }, 1000); // Añadir un pequeño retraso antes de recargar
+            }
+            }, 2000);
             }
 
 
@@ -305,23 +318,23 @@
         <script>
             // Mostrar categorías
             function toggleCategory(category) {
-                const categories = document.querySelectorAll(".category");
-                categories.forEach((cat) => (cat.style.display = "none"));
-                document.getElementById(category).style.display = "block";
+            const categories = document.querySelectorAll(".category");
+            categories.forEach((cat) => (cat.style.display = "none"));
+            document.getElementById(category).style.display = "block";
             }
 
             // Mostrar todos los productos por defecto
             window.onload = function () {
-                toggleCategory("todos");
+            toggleCategory("todos");
             };
             // Abrir modal de agregar
             function openAddModal() {
-                document.getElementById("addModal").style.display = "block";
+            document.getElementById("addModal").style.display = "block";
             }
 
             // Cerrar modal
             function closeModal(modalId) {
-                document.getElementById(modalId).style.display = "none";
+            document.getElementById(modalId).style.display = "none";
             }
         </script>
 
@@ -330,74 +343,74 @@
 
         <script>
             function guardarProducto() {
-                const producto = {
-                    nombre: document.getElementById('nombre').value,
+            const producto = {
+            nombre: document.getElementById('nombre').value,
                     descripcion: document.getElementById('descripcion').value,
                     precio: parseFloat(document.getElementById('precio').value),
                     tipoId: parseInt(document.getElementById('tipoId').value, 10),
                     estadoId: parseInt(document.getElementById('estadoId').value, 10)
-                };
-                // Verifica si hay campos vacíos
-                if (!producto.nombre || !producto.descripcion || !producto.precio || isNaN(producto.precio) || !producto.tipoId || !producto.estadoId) {
-                    mostrarAlerta('Por favor, complete todos los campos correctamente.', 'danger');
-                    return;
-                }
+            };
+            // Verifica si hay campos vacíos
+            if (!producto.nombre || !producto.descripcion || !producto.precio || isNaN(producto.precio) || !producto.tipoId || !producto.estadoId) {
+            mostrarAlerta('Por favor, complete todos los campos correctamente.', 'danger');
+            return;
+            }
 
-                // Crear el formulario con los parámetros
-                const formData = new URLSearchParams();
-                formData.append("nombre", producto.nombre);
-                formData.append("descripcion", producto.descripcion);
-                formData.append("precio", producto.precio);
-                formData.append("tipoId", producto.tipoId);
-                formData.append("estadoId", producto.estadoId);
-                fetch('/private/agregar', {
-                    method: 'POST',
+            // Crear el formulario con los parámetros
+            const formData = new URLSearchParams();
+            formData.append("nombre", producto.nombre);
+            formData.append("descripcion", producto.descripcion);
+            formData.append("precio", producto.precio);
+            formData.append("tipoId", producto.tipoId);
+            formData.append("estadoId", producto.estadoId);
+            fetch('/private/agregar', {
+            method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded', // Tipo de contenido adecuado
+                    'Content-Type': 'application/x-www-form-urlencoded', // Tipo de contenido adecuado
                     },
                     body: formData.toString() // Convertir los datos a formato URLSearchParams
-                })
-                        .then(response => response.json()) // Asegúrate de que la respuesta sea JSON
-                        .then(data => {
-                            if (data.mensaje) {
-                                mostrarAlerta(data.mensaje, 'success'); // Mostrar mensaje de éxito
-                                if (data.mensaje === "Producto agregado correctamente") {
-                                    setTimeout(() => {
-                                        location.reload(); // Recargar página después de 2 segundos
-                                    }, 2000);
-                                }
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            mostrarAlerta('Ocurrió un error al procesar la solicitud', 'danger');
-                        });
+            })
+                    .then(response => response.json()) // Asegúrate de que la respuesta sea JSON
+                    .then(data => {
+                    if (data.mensaje) {
+                    mostrarAlerta(data.mensaje, 'success'); // Mostrar mensaje de éxito
+                    if (data.mensaje === "Producto agregado correctamente") {
+                    setTimeout(() => {
+                    location.reload(); // Recargar página después de 2 segundos
+                    }, 2000);
+                    }
+                    }
+                    })
+                    .catch(error => {
+                    console.error('Error:', error);
+                    mostrarAlerta('Ocurrió un error al procesar la solicitud', 'danger');
+                    });
             }
 
             function mostrarAlerta(mensaje, tipo) {
-                const alertaDiv = document.createElement("div");
-                alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
-                alertaDiv.textContent = mensaje;
-                const alertContainer = document.getElementById("alert-container");
-                alertContainer.innerHTML = ''; // Limpiar alertas previas
-                alertContainer.appendChild(alertaDiv);
-                // Temporizador para eliminar la alerta después de 2 segundos
-                setTimeout(() => {
-                    alertaDiv.remove();
-                }, 2000);
+            const alertaDiv = document.createElement("div");
+            alertaDiv.classList.add("alert", `alert-${tipo}`, "mb-3");
+            alertaDiv.textContent = mensaje;
+            const alertContainer = document.getElementById("alert-container");
+            alertContainer.innerHTML = ''; // Limpiar alertas previas
+            alertContainer.appendChild(alertaDiv);
+            // Temporizador para eliminar la alerta después de 2 segundos
+            setTimeout(() => {
+            alertaDiv.remove();
+            }, 2000);
             }
 
         </script>
 
         <script>
             function logout() {
-                // Crear un formulario dinámico para hacer el POST Salir
-                var form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/logout';
-                // Enviar el formulario de manera automática
-                document.body.appendChild(form);
-                form.submit();
+            // Crear un formulario dinámico para hacer el POST Salir
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/logout';
+            // Enviar el formulario de manera automática
+            document.body.appendChild(form);
+            form.submit();
             }
         </script>
     </body>

@@ -1,30 +1,27 @@
-/* Estilo común para las alertas */
+/* Estilo base para las alertas */
 .alert {
     padding: 15px;
     margin-bottom: 10px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 8px; /* Bordes redondeados */
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+    color: #fff; /* Texto blanco para buen contraste */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     animation: fadeOut 2s forwards; /* Efecto de desvanecimiento */
 }
 
-/* Estilo para alertas de error */
+/* Alertas de error */
 .alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+    background-color: #ff6b6b; /* Rojo suave */
 }
 
-/* Estilo para alertas de éxito */
+/* Alertas de éxito */
 .alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
+    background-color: #48c78e; /* Verde suave */
 }
 
-/* Efecto de desvanecimiento */
+/* Animación de desvanecimiento */
 @keyframes fadeOut {
     0% {
         opacity: 1;
@@ -38,12 +35,12 @@
     }
 }
 
-/* Aplicar el mismo estilo y animación a #alert-container-edit */
+/* Ancho completo para contenedores */
 #alert-container, #alert-container-edit {
     width: 100%;
 }
 
-/* Asegurar que las alertas dentro de los contenedores se vean adecuadamente */
+/* Estilo de las alertas dentro de los contenedores */
 #alert-container .alert, #alert-container-edit .alert {
-    animation: fadeOut 2s forwards; /* Efecto de desvanecimiento */
+    animation: fadeOut 2s forwards;
 }

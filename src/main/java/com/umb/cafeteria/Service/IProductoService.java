@@ -4,6 +4,7 @@
  */
 package com.umb.cafeteria.Service;
 
+import com.umb.cafeteria.Entity.CatEstatusProd;
 import com.umb.cafeteria.Entity.CatTipoProd;
 import com.umb.cafeteria.Entity.Producto;
 import java.util.List;
@@ -27,5 +28,7 @@ public interface IProductoService {
     public Producto findByNombre(String nombre);
 
     public Producto findByIdProd(int id);
+
+    public List<Producto> findByProdTipoAndProsEst(CatTipoProd id, CatEstatusProd idE);
 
 }

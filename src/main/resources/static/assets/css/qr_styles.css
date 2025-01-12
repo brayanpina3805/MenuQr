@@ -82,3 +82,37 @@ body, html {
 .access-button:active {
     transform: translateY(0); /* Efecto de "presionar" el botón */
 }
+
+
+/*nav Link*/
+.secondary-link {
+    display: inline-block;
+    margin-top: 20px; /* Espacio arriba del enlace */
+    font-size: 18px; /* Tamaño de la fuente */
+    color: #ff8c00; /* Color que combine con el tema */
+    text-decoration: none; /* Eliminar el subrayado */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: all 0.3s ease-in-out; /* Transición suave para los efectos */
+    text-align: center; /* Centrado del texto */
+}
+
+.secondary-link:hover {
+    background-color: #ff8c00; /* Cambio de color en hover */
+    color: white; /* Color del texto cambia a blanco en hover */
+    transform: translateY(-3px); /* Efecto de desplazamiento */
+}
+
+.secondary-link:active {
+    transform: translateY(0); /* Efecto de "presionar" */
+}
+
+.qr-container .qr-image {
+    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    max-width: 300px; /* Ancho máximo para evitar que sea demasiado grande */
+    height: auto; /* Mantiene la proporción original de la imagen */
+    border-radius: 10px; /* Bordes redondeados para darle un mejor diseño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el QR */
+}
